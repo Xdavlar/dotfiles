@@ -1,18 +1,16 @@
 function main {
     $usr_folder = $env:UserProfile
-    $glaze_src = "glazewm\config.yaml"
-    $glaze_tar = "$usr_folder\.glzr\glazewm\config.yaml"
 
-    Write-Host $glaze_tar
-    create_symlink "GlazeVM" $glaze_src $glaze_tar
+    create_symlink "GlazeVM" "glazewm\config.yaml" "$usr_folder\.glzr\glazewm\config.yaml" 
+    create_symlink "Zebar" "zebar\config.yaml" "$usr_folder\.glzr\zebar\config.yaml"
 }
-
 
 function create_symlink {
     param (
         [string]$name,
         [string]$source_path,
-        [string]$target_path
+        [string]$target_path,
+        [bool]$verbose = $false
     )
 
     $source = (Resolve-Path $source_path).Path
@@ -28,13 +26,13 @@ function create_symlink {
     if (Test-Path $target) {
         # Check if the target is a file or symbolic link
         if ((Get-Item $target).PSIsContainer -eq $false) {
-            Write-Host "Removing existing link: $target"
+            if ($verbose) { Write-Host "Removing existing link: $target" }
             Remove-Item -Force $target
         }
     }
 
     # Create symbolic link
-    Write-Host "Creating symbolic link from $source to $target"
+    if ($verbose) {Write-Host "Creating symbolic link from $source to $target"}
     New-Item -ItemType SymbolicLink -Path $target -Target $source | Out-Null
 
     Write-Host "$name link created successfully!"
