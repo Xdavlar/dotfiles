@@ -23,13 +23,14 @@ function create_symlink {
     if (-Not (Test-Path $sourceDir)) {
         Write-Warning "Source directory does not exist: $sourceDir"
     }
-    return
-
-
+    
     # Remove existing link if it exists
-    if (Test-Path $target -or (Test-Path $target -PathType Leaf)) {
-        Write-Host "Removing existing link: $target"
-        Remove-Item -Force $target
+    if (Test-Path $target) {
+        # Check if the target is a file or symbolic link
+        if ((Get-Item $target).PSIsContainer -eq $false) {
+            Write-Host "Removing existing link: $target"
+            Remove-Item -Force $target
+        }
     }
 
     # Create symbolic link
