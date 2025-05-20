@@ -2,9 +2,14 @@
   config,
   pkgs,
   ...
-}:
-{
-  boot.loader.grub.device = "/dev/sda";   # (for BIOS systems only)
+}: let
+  modulesDirectory = "/home/erik/dotfiles/nixos/modules/";
+in {
+  imports = [
+    (modulesDirectory + "aliases.nix")
+  ];
+
+  boot.loader.grub.device = "/dev/sda"; # (for BIOS systems only)
   boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
 
   # Note: setting fileSystems is generally not
@@ -27,8 +32,30 @@
       git
       vim
       docker-compose
-    ];	
+      alejandra
+      tldr
+      atuin
+    ];
   };
 
+  fileSystems = {
+    "/mnt/Synology/download" = {
+      device = "ns.nas.se:/volume1/downloads";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+
+    "/mnt/Synology/media" = {
+      device = "ns.nas.se:/volume1/media";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+
+    "/mnt/Synology/CAD" = {
+      device = "ns.nas.se:/volume1/CAD";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+  };
   system.stateVersion = "23.11";
 }
