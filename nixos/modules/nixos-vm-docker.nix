@@ -33,6 +33,7 @@ in {
       alejandra
       tldr
       atuin
+      libnotify
     ];
   };
 
