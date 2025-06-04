@@ -33,7 +33,9 @@ in {
       alejandra
       tldr
       atuin
+
       libnotify
+      mako
     ];
   };
 
