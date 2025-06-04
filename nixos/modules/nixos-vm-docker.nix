@@ -40,11 +40,6 @@ in {
   };
 
   programs = {
-    bash.shellAliases = {
-      comp-sleep = "systemctl suspend";
-      comp-hib = "systemctl hibernate";
-    };
-
     nano.nanorc = ''
       set nowrap
       set tabstospaces
@@ -56,6 +51,7 @@ in {
 
   environment.interactiveShellInit = ''
     export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
+    PATH=~/bin:$PATH
   '';
 
   fileSystems = {
