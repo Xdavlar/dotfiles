@@ -12,10 +12,8 @@ in {
   boot.loader.grub.device = "/dev/sda"; # (for BIOS systems only)
   boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
 
-  # Note: setting fileSystems is generally not
-  # necessary, since nixos-generate-config figures them out
-  # automatically in hardware-configuration.nix.
-  #fileSystems."/".device = "/dev/disk/by-label/nixos";
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # Enable the OpenSSH server.
   services.sshd.enable = true;
@@ -37,6 +35,25 @@ in {
       atuin
     ];
   };
+
+  programs = {
+    bash.shellAliases = {
+      comp-sleep = "systemctl suspend";
+      comp-hib = "systemctl hibernate";
+    };
+
+    nano.nanorc = ''
+      set nowrap
+      set tabstospaces
+      set tabsize 2
+      set autoindent
+      set linenumbers
+    '';
+  };
+
+  environment.interactiveShellInit = ''
+    export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
+  '';
 
   fileSystems = {
     "/mnt/Synology/download" = {
