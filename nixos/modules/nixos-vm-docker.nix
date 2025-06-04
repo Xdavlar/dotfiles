@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: let
-  modulesDirectory = "/home/erik/dotfiles/nixos/modules/";
+  modulesDirectory = builtins.dirOf __curPos.file + "/";
 in {
   imports = [
     (modulesDirectory + "aliases.nix")

@@ -2,7 +2,7 @@
 set -e
 
 # cd to your config dir
-pushd ../modules/
+pushd ~/dotfiles/nixos/modules/
 
 # Edit your config
 $EDITOR "$HOSTNAME".nix
