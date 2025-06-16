@@ -6,6 +6,8 @@
   modulesDirectory = builtins.dirOf __curPos.file + "/";
 in {
   imports = [
+    (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
+
     (modulesDirectory + "aliases.nix")
   ];
 
@@ -17,8 +19,9 @@ in {
 
   # Enable the OpenSSH server.
   services.sshd.enable = true;
-
+  services.tailscale.enable = true;
   virtualisation.docker.enable = true;
+  services.vscode-server.enable = true;
 
   console.keyMap = "sv-latin1";
   users.users.erik = {
