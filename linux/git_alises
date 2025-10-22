@@ -16,4 +16,5 @@
 
    undo = reset HEAD~1 --mixed
    config-list = config --list --show-origin
-   
+   my-alises = config --get-regexp alias  
+
