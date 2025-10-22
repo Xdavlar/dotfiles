@@ -1,0 +1,19 @@
+# ============================================================================
+# Aliases
+# ============================================================================
+# This files is imported into .gitconfig using the syntax:
+# [include]
+#     path = /path/to/file
+
+[alias]
+   a = add
+   c = commit
+   s = status
+   
+   # Formats the branch output
+   br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+   lg = !git log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) [%an]\" --abbrev-commit -30
+
+   undo = reset HEAD~1 --mixed
+   config-list = config --list --show-origin
+   
