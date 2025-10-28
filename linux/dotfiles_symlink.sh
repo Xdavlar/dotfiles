@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Function to create a symlink from source to destination
 # Usage: create_symlink <source_path> <destination_path>
@@ -84,5 +84,6 @@ fi
 # Create symlinks
 create_symlink $LINUX_DIR/sway_config $HOME/.config/sway/config
 create_symlink $LINUX_DIR/vim_config $HOME/.vimrc
+#create_symlink $LINUX_DIR/sway_bar.sh $HOME/.config/sway/swaybar.sh
 
 echo "Dotfiles setup complete!"
