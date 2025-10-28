@@ -36,6 +36,7 @@ alias du='du -h'
 alias free='free -h'
 alias mkdir='mkdir -pv'
 alias cls='clear'
+alias PATH="echo $PATH | tr ':' '\n'"
 
 # ============================================================================
 # Git Aliases
