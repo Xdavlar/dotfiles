@@ -55,7 +55,7 @@ in {
       nautilus
       git
       tldr
-      wmctrl
+      wmctrl # Do I need this?
       alacritty
 
       # Programs

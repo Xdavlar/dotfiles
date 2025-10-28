@@ -17,7 +17,8 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred aupplication launcher
-set $menu wmenu-run
+#set $menu wmenu-run
+set $menu 'rofi -show combi -show-icons'
 
 # Wallpaper
 output * bg $HOME/Pictures/bg-nightsky.jpg fill
@@ -59,6 +60,7 @@ output HDMI-A-1 resolution 1920x1080 position 2560,0
 seat * xcursor_theme default 64
 
 bindsym $super+e exec nautilus
+bindsym $super+l exec 'swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null'
 
 ### Key bindings
 #
