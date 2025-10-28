@@ -65,15 +65,24 @@ create_symlink() {
     fi
 }
 
+# Main script execution starts here
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$HOME/dotfiles/"
+LINUX_DIR="$DOTFILES_DIR/linux"
 
-# I
-git config --global include.path $DOTFILES_DIR/linux/git_alias
+# Include all gitaliases
+git config --global include.path $LINUX_DIR/git_alias
 
-create_symlink "$DOTFILES_DIR/git_alias" "$HOME/.bashrc"
-# create_symlink "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
-# create_symlink "$DOTFILES_DIR/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
-# create_symlink "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
+# Add bash-aliases to the .bashrc
+if ! grep -q "source.*shell_aliases" ~/.bashrc; then
+    echo -e "\n# Load custom aliases\n[ -f $LINUX_DIR/shell_aliases ] && source $LINUX_DIR/shell_aliases" >> ~/.bashrc
+    echo "✓ Added shell_aliases to .bashrc"
+else
+    echo "✓ shell_aliases already sourced in .bashrc"
+fi
 
-echo "Dotfiles symlink script loaded. Use create_symlink <source> <destination> to create symlinks."
+# Create symlinks
+create_symlink $LINUX_DIR/sway_config $HOME/.config/sway/config
+create_symlink $LINUX_DIR/vim_config $HOME/.vimrc
+
+echo "Dotfiles setup complete!"
