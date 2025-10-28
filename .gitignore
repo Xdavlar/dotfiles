@@ -1,2 +1,6 @@
+# Fileendings
 *.log
 *.swp
+
+# Patterns
+*backup*
