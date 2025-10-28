@@ -69,5 +69,6 @@ create_symlink() {
 # Main script execution starts here
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-create_symlink $SCRIPT_DIR/erik-pc.nix $HOME/nixosModules/erik-pc.nix
-# Rest doesn't have to be symlinked. The script follows them "here" automatically
+create_symlink $SCRIPT_DIR/modules/erik-pc.nix $HOME/nixosModules/erik-pc.nix
+# Rest of nix-files doesn't have to be symlinked. "nixos-rebuild" follows them "here" automatically
+create_symlink $SCRIPT_DIR/scripts/rebuild-nixos $HOME/bin/rebuild-nixos
