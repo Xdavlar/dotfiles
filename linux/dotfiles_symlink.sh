@@ -40,6 +40,7 @@ create_symlink() {
             backup="${destination}.backup.$(date +%Y%m%d_%H%M%S)"
             mv "$destination" "$backup"
             echo "Created backup: $backup"
+            rm "$destination"
         else
             echo "Skipping: $destination"
             return 1
@@ -54,7 +55,7 @@ create_symlink() {
     fi
     
     # Create the symlink
-    ln -s "$source" "$destination"
+    ln -sf "$source" "$destination"
     
     if [ $? -eq 0 ]; then
         echo "✓ Created symlink: $destination -> $source"
@@ -82,8 +83,8 @@ else
 fi
 
 # Create symlinks
+create_symlink $LINUX_DIR/sway_bar $HOME/.config/sway/sway_bar.sh
 create_symlink $LINUX_DIR/sway_config $HOME/.config/sway/config
 create_symlink $LINUX_DIR/vim_config $HOME/.vimrc
-#create_symlink $LINUX_DIR/sway_bar.sh $HOME/.config/sway/swaybar.sh
 
 echo "Dotfiles setup complete!"
