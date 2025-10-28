@@ -1,0 +1,65 @@
+#!/bin/bash
+# Shell Aliases Configuration
+# Source this file from your .bashrc, .zshrc, or other shell config files
+# Add this line to your shell config: [ -f ~/.shell_aliases ] && source ~/.shell_aliases
+
+# ============================================================================
+# Navigation Aliases
+# ============================================================================
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ~='cd ~'
+
+# ============================================================================
+# Directory Listing Aliases
+# ============================================================================
+alias ls='ls --color=auto'
+alias ll='ls -lhF'
+alias la='ls -lhAF'
+alias l='ls -CF'
+alias lsd='ls -d */'  # List only directories
+
+# ============================================================================
+# Safety Aliases (Prompts before overwriting/deleting)
+# ============================================================================
+alias rm='rm -i'
+
+# ============================================================================
+# Utility Aliases
+# ============================================================================
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias df='df -h'
+alias du='du -h'
+alias free='free -h'
+alias mkdir='mkdir -pv'
+alias cls='clear'
+
+# ============================================================================
+# Git Aliases
+# ============================================================================
+# These are placed in a separte Git Alias file
+
+# ============================================================================
+# System Aliases
+# ============================================================================
+alias update='sudo apt update && sudo apt upgrade -y'  # Debian/Ubuntu
+alias install='sudo apt install'
+alias remove='sudo apt remove'
+alias ports='netstat -tulanp'
+alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'  # Search processes
+
+# ============================================================================
+# Custom Functions (can be added here too)
+# ============================================================================
+# Example: Create a directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# ============================================================================
+# Add your custom aliases below
+# ============================================================================
+
