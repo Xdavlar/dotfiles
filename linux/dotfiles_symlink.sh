@@ -68,7 +68,7 @@ create_symlink() {
 
 # Main script execution starts here
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DOTFILES_DIR="$HOME/dotfiles/"
+DOTFILES_DIR="$HOME/dotfiles"
 LINUX_DIR="$DOTFILES_DIR/linux"
 
 # Include all gitaliases
