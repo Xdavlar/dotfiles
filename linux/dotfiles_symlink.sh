@@ -13,10 +13,10 @@ create_symlink() {
         return 1
     fi
     
-    # Convert to absolute paths
-    source=$(realpath -m "$source")
-    destination=$(realpath -m "$destination")
-    
+        # Convert to absolute paths
+    source=$(realpath -sm "$source")
+    destination=$(realpath -sm "$destination")
+
     # Check if source file exists
     if [ ! -e "$source" ]; then
         echo "Error: Source file does not exist: $source"
@@ -82,8 +82,9 @@ else
     echo "✓ shell_aliases already sourced in .bashrc"
 fi
 
+echo $HOME
 # Create symlinks
-create_symlink $LINUX_DIR/sway_bar $HOME/.config/sway/sway_bar.sh
+create_symlink $LINUX_DIR/sway_bar.sh $HOME/.config/sway/sway_bar.sh
 create_symlink $LINUX_DIR/sway_config $HOME/.config/sway/config
 create_symlink $LINUX_DIR/vim_config $HOME/.vimrc
 
