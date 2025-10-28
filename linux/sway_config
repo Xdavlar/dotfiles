@@ -15,14 +15,14 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term konsole
+set $term alacritty
 # Your preferred aupplication launcher
 set $menu wmenu-run
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-#output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/Pictures/bg-nightsky.jpg fill
 
 #
 # Example configuration:
@@ -69,15 +69,12 @@ input * {
     xkb_options caps:escape
 }
 
-output DP-3 {
-   #mode 1920x1080@60.049Hz
-   mode 3840x2160@59.997Hz
-   #bg /usr/share/backgrounds/default.png fill
-   scale 1.5
-}
+output DP-3 resolution 3840x2160 position 0,0 scale 1.5
+# 2560 because of scaling
+output HDMI-A-1 resolution 1920x1080 position 2560,0 
 
 # Try to fix cursor size in Wayland (doesn't work...)
-seat * xcursor_theme default 32
+seat * xcursor_theme default 64
 
 bindsym $super+e exec nautilus
 
@@ -205,7 +202,7 @@ bindsym $super+e exec nautilus
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
-    # up will shrink the containers height
+    # up will shrink the containers heightstatus_command while ~/.config/sway/sway_bar.sh; do sleep 1; done
     # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
@@ -244,8 +241,10 @@ bindsym $mod+r mode "resize"
 bar {
     position bottom
     
-    status_command i3status
-    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    # status_command i3status
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    status_command while ~/.config/sway/sway_bar.sh; do sleep 1; done
+    #status_command while echo "Hi"; do sleep 1; done
 
     colors {
         statusline #ffffff
