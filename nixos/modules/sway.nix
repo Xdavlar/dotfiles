@@ -21,25 +21,25 @@
     # Will be exposed through DBus to programs willing to store secrets.
     services.gnome.gnome-keyring.enable = true;
 
-
     # enable Sway window manager
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
     };
 
-    services.greetd = {
-  enable = true;
-  settings = rec {
-    initial_session = {
-      command = "${pkgs.sway}/bin/sway";
-      user = "erik";
+    programs.bash.shellAliases = {
+      lock = "swaylock --color 000000 2>/dev/null";
     };
-    default_session = initial_session;
-  };
-};
 
-
-
+    services.greetd = {
+      enable = true;
+      settings = rec {
+        initial_session = {
+          command = "${pkgs.sway}/bin/sway";
+          user = "erik";
+        };
+        default_session = initial_session;
+      };
+    };
   };
 }

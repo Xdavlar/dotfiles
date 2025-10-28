@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   unstable = import <unstable> {
@@ -55,7 +56,6 @@ in {
       git
       tldr
       wmctrl
-      kdePackages.konsole
       alacritty
 
       # Programs
@@ -93,13 +93,13 @@ in {
     interactiveShellInit = ''
       export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
       PATH=~/bin:$PATH
+      EDITOR=vim
     '';
   };
 
   programs = {
-    bash.shellAliases = {
-      comp-sleep = "systemctl suspend";
-      comp-hib = "systemctl hibernate";
+    bash.shellAliases = lib.mkForce {
+      lock="swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
     };
 
     nano.nanorc = ''
