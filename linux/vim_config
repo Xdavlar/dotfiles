@@ -1,0 +1,84 @@
+" Basic .vimrc configuration
+
+" === General Settings ===
+set nocompatible              " Disable Vi compatibility
+filetype plugin indent on     " Enable filetype detection and plugins
+syntax enable                 " Enable syntax highlighting
+
+" === UI Settings ===
+set number                    " Show line numbers
+set relativenumber            " Show relative line numbers
+set showcmd                   " Show command in bottom bar
+set cursorline                " Highlight current line
+set wildmenu                  " Visual autocomplete for command menu
+set showmatch                 " Highlight matching brackets
+set ruler                     " Show cursor position
+
+" === Search Settings ===
+set incsearch                 " Search as characters are entered
+set hlsearch                  " Highlight search matches
+set ignorecase                " Case insensitive searching
+set smartcase                 " Case sensitive if uppercase present
+
+" === Indentation ===
+let s:indent = 3
+let &tabstop = s:indent
+let &softtabstop = s:indent
+let &shiftwidth = s:indent
+set expandtab                 " Convert tabs to spaces
+set autoindent                " Copy indent from current line
+set smartindent               " Smart autoindenting
+
+" === Performance ===
+set lazyredraw                " Redraw only when needed
+set ttyfast                   " Faster scrolling
+
+" === Backups ===
+set nobackup                  " Don't create backup files
+set nowritebackup             " Don't create backup before overwriting
+set noswapfile                " Don't create swap files
+
+" === Other Settings ===
+set encoding=utf-8            " Use UTF-8 encoding
+set backspace=indent,eol,start " Allow backspace over everything
+set hidden                    " Allow hidden buffers
+set history=1000              " Command history size
+set scrolloff=5               " Keep 5 lines visible around cursor
+set wrap                      " Wrap long lines
+set linebreak                 " Break lines at word boundaries
+
+" === Key Mappings ===
+" Set leader key to space
+let mapleader = " "
+
+" Clear search highlighting with Esc
+nnoremap <esc> :noh<return><esc>
+
+" Quick save
+nnoremap <leader>w :w<CR>
+
+" Quick quit
+nnoremap <leader>q :q<CR>
+
+" Navigate between splits easier
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Move lines up/down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+" === Color Scheme ===
+" Uncomment one of these if you have color schemes installed
+" colorscheme desert
+" colorscheme slate
+" colorscheme pablo
+
+" Enable 256 colors if terminal supports it
+if &term =~ '256color'
+    set t_Co=256
+endif
