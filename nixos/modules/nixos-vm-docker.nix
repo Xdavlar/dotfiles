@@ -17,9 +17,18 @@ in {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable the OpenSSH server.
-  services.sshd.enable = true;
-  services.tailscale.enable = true;
+  services = {
+    sshd.enable = true;
+    tailscale.enable = true;
+    cron = {
+      enable = true;
+      # Prune docker at midnight
+      systemCronJobs = [
+        "0 0 * * * root docker image prune -a -f"
+      ];
+    };
+  };
+
   virtualisation.docker.enable = true;
   services.vscode-server.enable = true;
 
@@ -36,6 +45,7 @@ in {
       alejandra
       tldr
       atuin
+      fastfetch
 
       libnotify
       mako
