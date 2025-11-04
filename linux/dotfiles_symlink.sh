@@ -88,5 +88,6 @@ create_symlink $LINUX_DIR/sway_bar.sh $HOME/.config/sway/sway_bar.sh
 create_symlink $LINUX_DIR/sway_config $HOME/.config/sway/config
 create_symlink $LINUX_DIR/vim_config $HOME/.vimrc
 create_symlink $LINUX_DIR/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+create_symlink $LINUX_DIR/lazyvim $HOME/.config/nvim/
 
 echo "Dotfiles setup complete!"
