@@ -10,5 +10,6 @@
     ll = "ls -la";
     comp-sleep = "systemctl suspend";
     comp-hib = "systemctl hibernate";
+    nix-shell-unstable = "nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
   };
 }

@@ -12,6 +12,7 @@ in {
     ./vscode.nix
     ./localization_swe.nix
     ./sway.nix
+    ./aliases.nix
   ];
 
   vscode.enable = true;
@@ -61,25 +62,39 @@ in {
       # Programs
       gnome-sound-recorder
       cheese
+      pandoc
+      texliveSmall
       unstable.discord
       unstable.firefox
       unstable.obsidian
       unstable.bitwarden-desktop
       unstable.signal-desktop
 
+      # Neovim
+      unstable.neovim
+      gcc
+      lazygit
+      fd
+      ripgrep
+      fzf
+      tree-sitter
+
       # Libraries
       libnotify # Needed for (notify-send)
-      # nerdfonts
-      nerd-fonts.fira-code
-      nerd-fonts.droid-sans-mono
-      nerd-fonts.noto
-      nerd-fonts.hack
-      nerd-fonts.ubuntu
     ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.noto
+    nerd-fonts.hack
+    nerd-fonts.ubuntu
+  ];
 
   # List packages installed in system profile. To seaopenglrch, run:
   # $ nix search wget
@@ -98,8 +113,8 @@ in {
   };
 
   programs = {
-    bash.shellAliases = lib.mkForce {
-      lock="swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
+    bash.shellAliases = {
+      lock = lib.mkForce "swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
     };
 
     nano.nanorc = ''
