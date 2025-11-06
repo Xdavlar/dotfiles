@@ -31,10 +31,6 @@ in {
 
   # Enable networking
   networking.networkmanager.enable = true;
-  services.xserver = {
-    xkb.layout = "se";
-    xkb.variant = "";
-  };
 
   # Configure console keymap
   console.keyMap = "sv-latin1";
