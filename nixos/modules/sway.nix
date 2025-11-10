@@ -15,7 +15,7 @@
       slurp # screenshot functionality
       wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
       mako # notification system developed by swaywm maintainer
-      rofi-wayland # launcher, replaces wmenu
+      rofi-wayland-unwrapped # launcher, replaces wmenu
     ];
 
     # Enable the gnome-keyring secrets vault.
