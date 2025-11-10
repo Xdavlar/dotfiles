@@ -23,9 +23,8 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.graphics = {
-    enable = true;
-  };
+  hardware.graphics.enable = true;
+  programs.steam.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -38,9 +37,19 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable keyring properly
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
-  services.pulseaudio.support32Bit = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  security.rtkit.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erik = {
