@@ -18,7 +18,7 @@ alias ls='ls --color=auto'
 alias ll='ls -lhF'
 alias la='ls -lhAF'
 alias l='ls -CF'
-alias lsd='ls -d */'  # List only directories
+alias lsd='ls -d */' # List only directories
 
 # ============================================================================
 # Safety Aliases (Prompts before overwriting/deleting)
@@ -46,21 +46,21 @@ alias PATH="echo $PATH | tr ':' '\n'"
 # ============================================================================
 # System Aliases
 # ============================================================================
-alias update='sudo apt update && sudo apt upgrade -y'  # Debian/Ubuntu
+alias update='sudo apt update && sudo apt upgrade -y' # Debian/Ubuntu
 alias install='sudo apt install'
 alias remove='sudo apt remove'
 alias ports='netstat -tulanp'
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'  # Search processes
+alias psg='ps aux | grep -v grep | grep -i -e VSZ -e' # Search processes
 
 # ============================================================================
 # Custom Functions (can be added here too)
 # ============================================================================
 # Example: Create a directory and cd into it
 mkcd() {
-    mkdir -p "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1"
 }
 
 # ============================================================================
 # Add your custom aliases below
 # ============================================================================
-
+alias boot-time-blame="systemd-analyze blame"
