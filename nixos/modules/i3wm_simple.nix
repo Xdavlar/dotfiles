@@ -10,7 +10,7 @@
       lib.mkEnableOption "enables i3 window manager";
   };
 
-  config = lib.mkIf config.i3vm.enable {
+  config = lib.mkIf config.i3wm.enable {
     services.xserver = {
       layout = "se";
       enable = true;

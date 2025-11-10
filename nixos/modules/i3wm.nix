@@ -10,7 +10,7 @@
       lib.mkEnableOption "enables i3 window manager";
   };
 
-  config = lib.mkIf config.i3vm.enable {
+  config = lib.mkIf config.i3wm.enable {
     environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
     services.xserver = {
       enable = true;
