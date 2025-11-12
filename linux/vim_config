@@ -80,6 +80,9 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 " colorscheme slate
 " colorscheme pablo
 
+set list
+set listchars=trail:·,tab:→\ ,nbsp:␣
+
 " Enable 256 colors if terminal supports it
 if &term =~ '256color'
     set t_Co=256
