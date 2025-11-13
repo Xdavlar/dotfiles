@@ -24,7 +24,6 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
 
   hardware.graphics.enable = true;
-  programs.steam.enable = true;
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -69,6 +68,7 @@ in {
       cheese
       pandoc
       texliveSmall
+      zathura # PDF-viewer
       unstable.discord
       unstable.firefox
       unstable.obsidian
@@ -120,6 +120,7 @@ in {
   programs = {
     bash.shellAliases = {
       lock = lib.mkForce "swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
+      pdf = "zathura";
     };
 
     nano.nanorc = ''
