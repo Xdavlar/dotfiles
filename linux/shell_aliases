@@ -64,3 +64,4 @@ mkcd() {
 # Add your custom aliases below
 # ============================================================================
 alias boot-time-blame="systemd-analyze blame"
+alias start-time-blame="systemd-analyze blame --user"

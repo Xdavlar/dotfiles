@@ -11,7 +11,7 @@ set $mod Mod1
 set $super Mod4
 # Home row direction keys, like vim
 set $left h
-set $down j
+set $down j 
 set $up k
 set $right l
 # Your preferred terminal emulator
@@ -31,6 +31,18 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
+# Import environment variables into systemd user session (fix breakage with gtk)
+# https://github.com/swaywm/sway/wiki#systemd-and-dbus-activation-environments
+# exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
+# exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
+
+# MOVED HERE BY HAND BECAUSE I DONT UNDERSTAND (https://discourse.nixos.org/t/slow-application-startup/29857/20)
+# Import the most important environment variables into the D-Bus and systemd
+# user environments (e.g. required for screen sharing and Pinentry prompts):
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+# enable systemd-integration
+exec "systemctl --user import-environment {,WAYLAND_}DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
+exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 ### Input configuration
 input "8916:4895:Mionix_Naos_QG" {
@@ -73,7 +85,6 @@ bindsym $super+l exec 'swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null'
     bindsym $mod+x exec $menu
 
     bindsym $mod+Shift+q kill
-
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
