@@ -67,6 +67,7 @@ in {
       gnome-sound-recorder
       cheese
       pandoc
+      headsetcontrol
       texliveSmall
       pinta
       zathura # PDF-viewer
