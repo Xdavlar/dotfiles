@@ -9,6 +9,7 @@ in {
     (fetchTarball "https://github.com/nix-community/nixos-vscode-server/tarball/master")
 
     (modulesDirectory + "aliases.nix")
+    (modulesDirectory + "system-core.nix")
   ];
 
   boot.loader.grub.device = "/dev/sda"; # (for BIOS systems only)
@@ -39,13 +40,8 @@ in {
     extraGroups = ["wheel" "docker"];
 
     packages = with pkgs; [
-      git
-      vim
       docker-compose
-      alejandra
-      tldr
       atuin
-      fastfetch
 
       libnotify
       mako

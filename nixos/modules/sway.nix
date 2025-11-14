@@ -18,10 +18,6 @@
       rofi-wayland-unwrapped # launcher, replaces wmenu
     ];
 
-    # Enable the gnome-keyring secrets vault.
-    # Will be exposed through DBus to programs willing to store secrets.
-    services.gnome.gnome-keyring.enable = true;
-
     # enable Sway window manager
     programs.sway = {
       enable = true;
@@ -40,6 +36,22 @@
           user = "erik";
         };
         default_session = initial_session;
+      };
+    };
+
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+      config = {
+        sway = {
+          default = lib.mkForce ["wlr" "gtk"];
+          "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+          "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+        };
       };
     };
   };

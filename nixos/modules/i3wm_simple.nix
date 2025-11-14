@@ -6,7 +6,7 @@
   ...
 }: {
   options = {
-    i3vm.enable =
+    i3wm.enable =
       lib.mkEnableOption "enables i3 window manager";
   };
 

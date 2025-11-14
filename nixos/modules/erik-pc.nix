@@ -13,7 +13,13 @@ in {
     ./localization_swe.nix
     ./sway.nix
     ./aliases.nix
+    ./system-core.nix
   ];
+
+  # 500 MB (https://discourse.nixos.org/t/my-nixos-installation-is-stuck-in-the-download-buffer-is-full/65534/5)
+  nix.settings = {
+    download-buffer-size = 524288000; # 500 MiB
+  };
 
   vscode.enable = true;
   localization_swe.enable = true;
@@ -36,10 +42,6 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable keyring properly
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   services.pipewire = {
@@ -58,8 +60,6 @@ in {
     packages = with pkgs; [
       # OS
       nautilus
-      git
-      tldr
       wmctrl # Do I need this?
       alacritty
 
@@ -68,6 +68,7 @@ in {
       cheese
       pandoc
       texliveSmall
+      pinta
       zathura # PDF-viewer
       unstable.discord
       unstable.firefox
@@ -101,14 +102,11 @@ in {
     nerd-fonts.ubuntu
   ];
 
-  # List packages installed in system profile. To seaopenglrch, run:
-  # $ nix search wget
   environment = {
-    systemPackages = with pkgs; [
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-      wget
-      alejandra
-    ];
+    sessionVariables = {
+      MOZ_ENABLE_WAYLAND = "1";
+      MOZ_WEBRENDER = "1";
+    };
 
     interactiveShellInit = ''
       export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
