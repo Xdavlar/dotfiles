@@ -64,7 +64,10 @@ in {
       alacritty
 
       # Programs
-      gnome-sound-recorder
+      drawio
+      docker
+      spotify
+      shellcheck
       cheese
       pandoc
       headsetcontrol

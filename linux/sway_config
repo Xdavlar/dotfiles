@@ -197,7 +197,7 @@ bindsym $super+l exec 'swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null'
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
-    # up will shrink the containers heightstatus_command while ~/.config/sway/sway_bar.sh; do sleep 1; done
+    # up will shrink the containers height
     # down will grow the containers height
     bindsym $left resize shrink width 10px
     bindsym $down resize grow height 10px
@@ -235,7 +235,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position bottom
+    position top
     
     # status_command i3status
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
