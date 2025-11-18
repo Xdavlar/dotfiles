@@ -12,7 +12,6 @@ in {
     (modulesDirectory + "system-core.nix")
   ];
 
-  boot.loader.grub.device = "/dev/sda"; # (for BIOS systems only)
   boot.loader.systemd-boot.enable = true; # (for UEFI systems only)
 
   # Allow unfree packages
