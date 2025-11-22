@@ -24,6 +24,11 @@
       wrapperFeatures.gtk = true;
     };
 
+    environment.variables = {
+      GTK_USE_PORTAL = 0;
+      GST_PLUGIN_SYSTEM_PATH_1_0 = ["/run/current-system/sw/lib/gstreamer-1.0"];
+    };
+
     programs.bash.shellAliases = {
       lock = "swaylock --color 000000 2>/dev/null";
     };

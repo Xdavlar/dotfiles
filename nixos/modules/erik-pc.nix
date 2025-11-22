@@ -42,6 +42,9 @@ in {
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   services.pipewire = {
@@ -51,6 +54,12 @@ in {
     pulse.enable = true;
   };
   security.rtkit.enable = true;
+
+  services.dbus.implementation = "broker";
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+
+  services.upower.enable = true;  # Battery/power management
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erik = {
@@ -62,10 +71,12 @@ in {
       nautilus
       wmctrl # Do I need this?
       alacritty
+      dbus
 
       # Programs
+      discord
       drawio
-      docker
+      docker-compose
       spotify
       shellcheck
       cheese
@@ -108,8 +119,10 @@ in {
 
   environment = {
     sessionVariables = {
-      MOZ_ENABLE_WAYLAND = "1";
-      MOZ_WEBRENDER = "1";
+      MOZ_ENABLE_WAYLAND=1;
+      MOZ_WEBRENDER =1;
+      MOZ_DISABLE_IDLE_DETECTION=1;
+      ACCESSIBILITY_ENABLED=0;
     };
 
     interactiveShellInit = ''
@@ -132,6 +145,8 @@ in {
       set autoindent
       set linenumbers
     '';
+
+    dconf.enable = true;
   };
 
   # Enable the OpenSSH daemon.
