@@ -4,7 +4,7 @@
   options,
   ...
 }: let
-  hostname = "nixos-vm-docker";
+  hostname = "nixos";
 in {
   networking.hostName = hostname;
   imports = [

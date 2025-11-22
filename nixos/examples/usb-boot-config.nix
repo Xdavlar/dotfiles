@@ -4,7 +4,7 @@
   options,
   ...
 }: let
-  hostname = "erik-pc"; # to alllow per-machine config
+  hostname = "" # to alllow per-machine config
 in {
   networking.hostName = hostname;
 
