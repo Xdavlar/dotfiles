@@ -12,4 +12,6 @@ in {
     ./hardware-configuration.nix
     (/home/erik/dotfiles/nixos/modules + "/${hostname}.nix")
   ];
+
+  system.stateVersion = "XX.xx";
 }
