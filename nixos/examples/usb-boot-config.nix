@@ -4,7 +4,7 @@
   options,
   ...
 }: let
-  hostname = "" # to alllow per-machine config
+  hostname = ""; # to alllow per-machine config
 in {
   networking.hostName = hostname;
 
@@ -16,7 +16,7 @@ in {
   # Trying to solve USB-C mounting issues
   boot.initrd.kernelModules = ["usb_storage" "uas" "sd_mod"];
   # hardware.enableAllHardware = true;
-  boot.kernelParams = [ "rootdelay=5" ];
+  boot.kernelParams = ["rootdelay=5"];
 
-  system.stateVersion = "23.11";
+  system.stateVersion = "XX.xx";
 }
