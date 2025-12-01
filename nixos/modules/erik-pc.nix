@@ -43,7 +43,7 @@ in {
   services.printing.enable = true;
 
   # Enable docker
-  virtualisation.docker.enable = true;
+  # virtualisation.docker.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -58,8 +58,6 @@ in {
   services.dbus.implementation = "broker";
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
-
-  services.upower.enable = true;  # Battery/power management
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erik = {
@@ -118,13 +116,6 @@ in {
   ];
 
   environment = {
-    sessionVariables = {
-      MOZ_ENABLE_WAYLAND=1;
-      MOZ_WEBRENDER =1;
-      MOZ_DISABLE_IDLE_DETECTION=1;
-      ACCESSIBILITY_ENABLED=0;
-    };
-
     interactiveShellInit = ''
       export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
       PATH=~/bin:$PATH
