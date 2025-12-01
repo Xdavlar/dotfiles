@@ -9,6 +9,7 @@
     systemPackages = with pkgs; [
       alejandra
       git
+      git-lfs
       tldr
       fastfetch
       ripgrep
