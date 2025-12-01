@@ -21,7 +21,7 @@ set $term alacritty
 set $menu 'rofi -show combi -show-icons'
 
 # Wallpaper
-output * bg $HOME/Pictures/bg-nightsky.jpg fill
+output * bg  $HOME/dotfiles/images/nixos-wallpaper-logo.jpg fill
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
