@@ -57,7 +57,6 @@ in {
 
   services.dbus.implementation = "broker";
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.enableGnomeKeyring = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erik = {
