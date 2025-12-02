@@ -16,6 +16,7 @@
       wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
       mako # notification system developed by swaywm maintainer
       rofi-unwrapped # launcher, replaces wmenu
+      tuigreet
     ];
 
     # Enable the X11 windowing system.
@@ -34,12 +35,11 @@
 
     services.greetd = {
       enable = true;
-      settings = rec {
-        initial_session = {
-          command = "${pkgs.sway}/bin/sway";
-          user = "erik";
+      settings = {
+        background = "$HOME/dotfiles/nixos-wallpaper-logo.jpg";
+        default_session = {
+          command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${pkgs.sway}/bin/sway";
         };
-        default_session = initial_session;
       };
     };
   };

@@ -18,4 +18,8 @@
       wget
     ];
   };
+
+  environment.loginShellInit = ''
+    fastfetch
+  '';
 }
