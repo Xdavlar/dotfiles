@@ -44,6 +44,7 @@ in {
 
   # Enable docker
   # virtualisation.docker.enable = true;
+  programs.steam.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -57,6 +58,7 @@ in {
 
   services.dbus.implementation = "broker";
   services.gnome.gnome-keyring.enable = true;
+  services.tailscale.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erik = {
@@ -66,6 +68,7 @@ in {
     packages = with pkgs; [
       # OS
       nautilus
+      localsend
       wmctrl # Do I need this?
       alacritty
       dbus
@@ -87,6 +90,7 @@ in {
       unstable.obsidian
       unstable.bitwarden-desktop
       unstable.signal-desktop
+      unstable.claude-code
 
       # Neovim
       unstable.neovim
@@ -101,6 +105,10 @@ in {
       libnotify # Needed for (notify-send)
     ];
   };
+
+  security.pki.certificateFiles = [
+    /etc/nixos/crow-local.pem
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
