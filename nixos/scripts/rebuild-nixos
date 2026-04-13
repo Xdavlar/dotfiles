@@ -3,10 +3,10 @@
 set -e
 
 # cd to your config dir
-pushd ~/dotfiles/nixos/modules/
+pushd ~/dotfiles/nixos/
 
 # Edit your config
-$EDITOR "$HOSTNAME".nix
+$EDITOR "modules/configurations/$HOSTNAME.nix"
 
 if git diff --quiet '*.nix'; then
     echo "No changes detected, exiting."
@@ -24,7 +24,7 @@ git diff -U0 '*.nix'
 echo "NixOS Rebuilding..."
 
 # Rebuild, output simplified errors, log trackebacks
-sudo nixos-rebuild switch &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
+sudo nixos-rebuild switch --flake .#"$HOSTNAME" &>nixos-switch.log || (cat nixos-switch.log | grep --color error && exit 1)
 
 # Back to where you were
 popd
