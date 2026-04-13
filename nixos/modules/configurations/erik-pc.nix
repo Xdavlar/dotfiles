@@ -18,7 +18,7 @@ in {
       config.flake.nixosModules.vscode
       config.flake.nixosModules.sway
       config.flake.nixosModules.i3wm
-      ../../hosts/erik-pc/hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       ({
         pkgs,
         lib,

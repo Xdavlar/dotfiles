@@ -8,7 +8,7 @@
     modules = [
       config.flake.nixosModules.system-core
       config.flake.nixosModules.aliases
-      ../../hosts/nixos-vm-docker/hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
       ({pkgs, ...}: {
         boot.loader.systemd-boot.enable = true;
