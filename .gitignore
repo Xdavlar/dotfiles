@@ -1,9 +1,14 @@
 # Fileendings
 *.log
 *.swp
+*.spl # VIM binary dictionary
 
 # Patterns
 *backup*
 
 # Files
 CLAUDE.md
+
+# Folders
+linux/lazyvim/spell/
+linux/lazyvim/lua/
