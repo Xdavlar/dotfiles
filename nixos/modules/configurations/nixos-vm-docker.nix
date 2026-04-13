@@ -8,7 +8,8 @@
     modules = [
       config.flake.nixosModules.system-core
       config.flake.nixosModules.aliases
-      /etc/nixos/hardware-configuration.nix
+      config.flake.nixosModules.nano
+      ../../hosts/nixos-vm-docker/hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
       ({pkgs, ...}: {
         boot.loader.systemd-boot.enable = true;
@@ -43,13 +44,6 @@
           ];
         };
 
-        programs.nano.nanorc = ''
-          set nowrap
-          set tabstospaces
-          set tabsize 2
-          set autoindent
-          set linenumbers
-        '';
 
         environment.interactiveShellInit = ''
           export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "

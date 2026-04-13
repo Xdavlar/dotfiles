@@ -18,7 +18,8 @@ in {
       config.flake.nixosModules.vscode
       config.flake.nixosModules.sway
       config.flake.nixosModules.i3wm
-      /etc/nixos/hardware-configuration.nix
+      config.flake.nixosModules.nano
+      ../../hosts/erik-pc/hardware-configuration.nix
       ({
         pkgs,
         lib,
@@ -140,13 +141,6 @@ in {
             pdf = "zathura";
           };
 
-          nano.nanorc = ''
-            set nowrap
-            set tabstospaces
-            set tabsize 2
-            set autoindent
-            set linenumbers
-          '';
 
           dconf.enable = true;
         };
