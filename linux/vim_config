@@ -48,6 +48,7 @@ set history=1000              " Command history size
 set scrolloff=5               " Keep 5 lines visible around cursor
 set wrap                      " Wrap long lines
 set linebreak                 " Break lines at word boundaries
+set autochdir                 " Set working folder to the open file
 
 " === Key Mappings ===
 " Set leader key to space
