@@ -35,6 +35,7 @@
       comp-hib = "systemctl hibernate";
       nix-shell-unstable = "nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
       boot-time-blame = "systemd-analyze blame";
+      rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles/nixos#$(hostname)";
       start-time-blame = "systemd-analyze blame --user";
     };
   };
