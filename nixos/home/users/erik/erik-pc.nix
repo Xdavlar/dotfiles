@@ -9,6 +9,10 @@
 
   home.stateVersion = "25.11";
 
+  programs.bash.shellAliases = {
+    rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles/nixos#erik-pc";
+  };
+
   home.packages = with pkgs; [
     # OS
     dbus
