@@ -46,6 +46,11 @@ exec systemctl --user set-environment UPOWER_ENABLED=0
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
 ### Input configuration
+input type:keyboard {
+    xkb_layout se
+    xkb_options caps:escape
+}
+
 input "8916:4895:Mionix_Naos_QG" {
     accel_profile "flat"
     pointer_accel 0
