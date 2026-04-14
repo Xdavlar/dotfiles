@@ -2,35 +2,25 @@
   config,
   inputs,
   ...
-}: let
-  pkgs-unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-in {
+}: {
   flake.nixosConfigurations.erik-pc = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
-    specialArgs = {inherit pkgs-unstable;};
     modules = [
       config.flake.nixosModules.system-core
-      config.flake.nixosModules.aliases
       config.flake.nixosModules.localization_swe
-      config.flake.nixosModules.vscode
       config.flake.nixosModules.sway
+      config.flake.nixosModules.sddm
+      config.flake.nixosModules.plasma6
       config.flake.nixosModules.i3wm
-      config.flake.nixosModules.nano
+      config.flake.nixosModules.home-manager-erik
       ../../hosts/erik-pc/hardware-configuration.nix
-      ({
-        pkgs,
-        lib,
-        pkgs-unstable,
-        ...
-      }: {
+      ({pkgs, ...}: {
         nix.settings.download-buffer-size = 524288000;
 
-        vscode.enable = true;
         localization_swe.enable = true;
         sway.enable = true;
+        sddm.enable = true;
+        plasma6.enable = true;
 
         networking.hostName = "erik-pc";
 
@@ -67,51 +57,12 @@ in {
           isNormalUser = true;
           description = "erik";
           extraGroups = ["networkmanager" "wheel" "docker" "kvm"];
-          packages = with pkgs; [
-            # OS
-            alacritty
-            dbus
-            localsend
-            nautilus
-            wmctrl
+        };
 
-            # Programs
-            cheese
-            discord
-            docker-compose
-            drawio
-            headsetcontrol
-            libreoffice
-            pandoc
-            pinta
-            python314
-            qemu_kvm
-            shellcheck
-            spotify
-            texliveSmall
-            tree
-            unzip
-            zathura
-            pkgs-unstable.discord
-            pkgs-unstable.firefox
-            pkgs-unstable.google-chrome
-            pkgs-unstable.obsidian
-            pkgs-unstable.bitwarden-desktop
-            pkgs-unstable.signal-desktop
-            pkgs-unstable.claude-code
-
-            # Neovim
-            fd
-            fzf
-            gcc
-            lazygit
-            ripgrep
-            tree-sitter
-            pkgs-unstable.neovim
-
-            # Libraries
-            libnotify
-          ];
+        users.users.maria = {
+          isNormalUser = true;
+          description = "maria";
+          extraGroups = ["networkmanager"];
         };
 
         security.pki.certificateFiles = [
@@ -129,23 +80,12 @@ in {
           nerd-fonts.ubuntu
         ];
 
-        environment.interactiveShellInit = ''
-          export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
-          PATH=~/bin:$PATH
-          EDITOR=vim
-        '';
-
-        programs = {
-          bash.shellAliases = {
-            lock = lib.mkForce "swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
-            pdf = "zathura";
-          };
-
-
-          dconf.enable = true;
-        };
+        programs.dconf.enable = true;
 
         services.openssh.enable = true;
+
+        home-manager.users.erik = import ../../home/users/erik/erik-pc.nix;
+        home-manager.users.maria = import ../../home/users/maria/erik-pc.nix;
 
         system.stateVersion = "25.11";
       })

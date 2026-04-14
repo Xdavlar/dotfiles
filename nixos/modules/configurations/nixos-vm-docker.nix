@@ -7,11 +7,10 @@
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.system-core
-      config.flake.nixosModules.aliases
-      config.flake.nixosModules.nano
+      config.flake.nixosModules.home-manager-erik
       ../../hosts/nixos-vm-docker/hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
-      ({pkgs, ...}: {
+      ({...}: {
         boot.loader.systemd-boot.enable = true;
 
         nixpkgs.config.allowUnfree = true;
@@ -36,19 +35,7 @@
           isNormalUser = true;
           home = "/home/erik";
           extraGroups = ["wheel" "docker"];
-          packages = with pkgs; [
-            docker-compose
-            atuin
-            libnotify
-            mako
-          ];
         };
-
-
-        environment.interactiveShellInit = ''
-          export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
-          PATH=~/bin:$PATH
-        '';
 
         fileSystems = {
           "/mnt/Synology/download" = {
@@ -67,6 +54,8 @@
             options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
           };
         };
+
+        home-manager.users.erik = import ../../home/users/erik/nixos-vm-docker.nix;
 
         system.stateVersion = "23.11";
       })
