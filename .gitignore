@@ -4,11 +4,12 @@
 *.spl # VIM binary dictionary
 
 # Patterns
-*backup*
 
 # Files
 CLAUDE.md
 
 # Folders
-linux/lazyvim/spell/
+*backup*
+*result*
 linux/lazyvim/lua/
+linux/lazyvim/spell/
