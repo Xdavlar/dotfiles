@@ -5,6 +5,8 @@
     config = lib.mkIf config.localization_swe.enable {
       time.timeZone = "Europe/Stockholm";
       console.keyMap = "sv-latin1";
+      services.xserver.xkb.layout = "se";
+      services.xserver.xkb.options = "caps:escape";
       i18n.defaultLocale = "en_US.UTF-8";
       i18n.extraLocaleSettings = {
         LC_ADDRESS = "sv_SE.UTF-8";

@@ -60,17 +60,12 @@ workspace 10 output HDMI-A-1
 assign [app_id="firefox"] workspace 3
 assign [class="obsidian"] workspace 9
 
-input * {
-    xkb_layout "se"
-    xkb_options caps:escape
-}
-
 output DP-3 resolution 3840x2160 position 0,0 scale 1.5
 # 2560 because of scaling
 output HDMI-A-1 resolution 1920x1080 position 2560,0 
 
 # Try to fix cursor size in Wayland (doesn't work...)
-seat * xcursor_theme default 64
+seat * xcursor_theme Adwaita 24
 
 # Inhibit idle (screen lock) when any window is fullscreen (e.g. gaming with controller)
 for_window [app_id=".*"] inhibit_idle fullscreen
