@@ -30,6 +30,7 @@
         virtualisation.docker.enable = true;
 
         console.keyMap = "sv-latin1";
+        nix.settings.experimental-features = ["nix-command" "flakes"];
 
         users.users.erik = {
           isNormalUser = true;
