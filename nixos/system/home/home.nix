@@ -21,6 +21,6 @@ in {
       config.allowUnfree = true;
     };
     extraSpecialArgs = {inherit pkgs-unstable;};
-    modules = [../../home/users/erik/erik-pc.nix];
+    modules = [../../hm/users/erik/erik-pc.nix];
   };
 }

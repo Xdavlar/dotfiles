@@ -8,7 +8,7 @@
     modules = [
       config.flake.nixosModules.system-core
       config.flake.nixosModules.home-manager-erik
-      ../../hosts/nixos-vm-docker/hardware-configuration.nix
+      ./hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
       ({...}: {
         boot.loader.systemd-boot.enable = true;
@@ -55,7 +55,7 @@
           };
         };
 
-        home-manager.users.erik = import ../../home/users/erik/nixos-vm-docker.nix;
+        home-manager.users.erik = import ../../hm/users/erik/nixos-vm-docker.nix;
 
         system.stateVersion = "23.11";
       })

@@ -13,7 +13,7 @@
       config.flake.nixosModules.plasma6
       config.flake.nixosModules.i3wm
       config.flake.nixosModules.home-manager-erik
-      ../../hosts/erik-pc/hardware-configuration.nix
+      ./hardware-configuration.nix
       ({pkgs, ...}: {
         nix.settings.download-buffer-size = 524288000;
 
@@ -66,7 +66,7 @@
         };
 
         security.pki.certificateFiles = [
-          ../../hosts/erik-pc/crow-local.pem
+          ./crow-local.pem
         ];
 
         nixpkgs.config.allowUnfree = true;
@@ -84,8 +84,8 @@
 
         services.openssh.enable = true;
 
-        home-manager.users.erik = import ../../home/users/erik/erik-pc.nix;
-        home-manager.users.maria = import ../../home/users/maria/erik-pc.nix;
+        home-manager.users.erik = import ../../hm/users/erik/erik-pc.nix;
+        home-manager.users.maria = import ../../hm/users/maria/erik-pc.nix;
 
         system.stateVersion = "25.11";
       })

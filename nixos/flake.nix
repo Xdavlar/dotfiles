@@ -17,6 +17,10 @@
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux"];
 
-      imports = [(inputs.import-tree ./modules)];
+      imports = [
+        (inputs.import-tree ./system)
+        ./hosts/erik-pc/configuration.nix
+        ./hosts/nixos-vm-docker/configuration.nix
+      ];
     };
 }
