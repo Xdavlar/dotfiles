@@ -6,7 +6,9 @@
       fzf
       git
       git-lfs
+      htop
       ripgrep
+      shellcheck
       tldr
       tree
       vim

@@ -8,12 +8,4 @@
   home.homeDirectory = "/home/maria";
 
   programs.home-manager.enable = true;
-
-  home.packages = with pkgs; [
-    fastfetch
-    fzf
-    ripgrep
-    tldr
-    tree
-  ];
 }

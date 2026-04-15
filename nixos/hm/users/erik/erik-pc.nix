@@ -41,7 +41,7 @@
     pkgs-unstable.bitwarden-desktop
     pkgs-unstable.claude-code
     pkgs-unstable.discord
-pkgs-unstable.google-chrome
+    pkgs-unstable.google-chrome
     pkgs-unstable.obsidian
     pkgs-unstable.signal-desktop
     pkgs-unstable.spotify
