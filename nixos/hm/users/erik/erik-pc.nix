@@ -5,6 +5,7 @@
     ../../modules/programs/neovim.nix
     ../../modules/programs/vscode.nix
     ../../modules/desktop/sway.nix
+    ../../modules/programs/firefox.nix
   ];
 
   home.stateVersion = "25.11";
@@ -40,8 +41,7 @@
     pkgs-unstable.bitwarden-desktop
     pkgs-unstable.claude-code
     pkgs-unstable.discord
-    pkgs-unstable.firefox
-    pkgs-unstable.google-chrome
+pkgs-unstable.google-chrome
     pkgs-unstable.obsidian
     pkgs-unstable.signal-desktop
     pkgs-unstable.spotify
