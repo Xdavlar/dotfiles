@@ -231,10 +231,9 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
-    #bindsym Shift+Print exec grim -g "$(slurp)"  # select area
-    bindsym Shift+Print exec grim -g "$(slurp)" ~/Pictures/$(rofi -dmenu -p "Screenshot name: ").png
+    bindsym Print exec flameshot gui
+    bindsym --whole-window $mod+button4 workspace prev
+    bindsym --whole-window $mod+button5 workspace next
 #
 # Status Bar:
 #

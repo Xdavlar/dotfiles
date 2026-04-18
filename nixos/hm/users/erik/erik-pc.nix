@@ -21,6 +21,7 @@
     cheese
     docker-compose
     drawio
+    flameshot
     headsetcontrol
     libreoffice
     pandoc
@@ -49,6 +50,17 @@
     # Libraries
     libnotify
   ];
+
+  xdg.configFile."mako/config".text = ''
+    [app-name=flameshot summary="Flameshot Info"]
+    invisible=1
+  '';
+
+  xdg.configFile."flameshot/flameshot.ini".text = ''
+    [General]
+    disabledGrimWarning=true
+    showStartupLaunchMessage=false
+  '';
 
   programs.bash.shellAliases = {
     lock = "swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
