@@ -29,6 +29,7 @@
     python314
     qemu_kvm
     texliveSmall
+    thunderbird
     unzip
     zathura
 
