@@ -38,6 +38,7 @@
       rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles/nixos#$(hostname)";
       start-time-blame = "systemd-analyze blame --user";
       me = "echo $(whoami)@$(hostname)";
+      vf = "vim $(fzf)";
     };
   };
 }
