@@ -12,6 +12,7 @@
       config.flake.nixosModules.sddm
       config.flake.nixosModules.plasma6
       config.flake.nixosModules.i3wm
+      config.flake.nixosModules.steam
       config.flake.nixosModules.home-manager-erik
       ./hardware-configuration.nix
       ({pkgs, ...}: {
@@ -21,6 +22,7 @@
         sway.enable = true;
         sddm.enable = true;
         plasma6.enable = true;
+        steam.enable = true;
 
         networking.hostName = "erik-pc";
 
