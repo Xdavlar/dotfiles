@@ -2,6 +2,7 @@
   imports = [
     ../../modules/shell/bash.nix
     ../../modules/shell/git.nix
+    ../../modules/shell/zoxide.nix
     ../../modules/programs/vim.nix
     ../../modules/programs/nano.nix
   ];
