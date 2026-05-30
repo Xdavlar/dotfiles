@@ -36,6 +36,7 @@
       nix-shell-unstable = "nix-shell -I nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
       boot-time-blame = "systemd-analyze blame";
       rebuild = "sudo nixos-rebuild switch --flake ~/dotfiles/nixos#$(hostname)";
+      hm-switch = "home-manager switch -b backup --flake ~/dotfiles/nixos#$(whoami)@$(hostname)";
       start-time-blame = "systemd-analyze blame --user";
       me = "echo $(whoami)@$(hostname)";
       vf = "vim $(fzf)";
