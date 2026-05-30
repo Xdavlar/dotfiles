@@ -4,6 +4,7 @@
     profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       naumovs.color-highlight
+      rust-lang.rust-analyzer
     ];
   };
 }
