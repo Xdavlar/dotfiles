@@ -13,6 +13,7 @@
       config.flake.nixosModules.plasma6
       config.flake.nixosModules.i3wm
       config.flake.nixosModules.steam
+      config.flake.nixosModules.languagetool
       ./hardware-configuration.nix
       ({pkgs, ...}: {
         nix.settings.download-buffer-size = 524288000;
@@ -21,6 +22,7 @@
         sway.enable = true;
         sddm.enable = true;
         plasma6.enable = true;
+        languagetool.enable = true;
 
         networking.hostName = "erik-pc";
 
