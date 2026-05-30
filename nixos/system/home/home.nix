@@ -1,26 +1,25 @@
 {inputs, ...}: let
-  pkgs-unstable = import inputs.nixpkgs-unstable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
+  mkHome = {
+    system ? "x86_64-linux",
+    modules,
+  }:
+    inputs.home-manager.lib.homeManagerConfiguration {
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+      extraSpecialArgs = {
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      };
+      inherit modules;
+    };
 in {
-  flake.nixosModules.home-manager-erik = {...}: {
-    imports = [inputs.home-manager.nixosModules.home-manager];
-
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      backupFileExtension = "backup";
-      extraSpecialArgs = {inherit pkgs-unstable;};
-    };
-  };
-
-  flake.homeConfigurations."erik" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = import inputs.nixpkgs {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
-    };
-    extraSpecialArgs = {inherit pkgs-unstable;};
-    modules = [../../hm/users/erik/erik-pc.nix];
+  flake.homeConfigurations = {
+    "erik@erik-pc" = mkHome {modules = [../../hm/users/erik/erik-pc.nix];};
+    "erik@nixos-vm-docker" = mkHome {modules = [../../hm/users/erik/nixos-vm-docker.nix];};
+    "maria@erik-pc" = mkHome {modules = [../../hm/users/maria/erik-pc.nix];};
   };
 }

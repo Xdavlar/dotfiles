@@ -7,7 +7,6 @@
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.system-core
-      config.flake.nixosModules.home-manager-erik
       ./hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
       ({...}: {
@@ -55,8 +54,6 @@
             options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
           };
         };
-
-        home-manager.users.erik = import ../../hm/users/erik/nixos-vm-docker.nix;
 
         system.stateVersion = "23.11";
       })
