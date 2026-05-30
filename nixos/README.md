@@ -136,7 +136,7 @@ Example skeleton:
 
 | Host | Description | State version |
 |------|-------------|---------------|
-| `erik-pc` | Desktop, Sway WM, full GUI stack | 25.11 |
+| `erik-pc` | Desktop, Sway WM, full GUI stack | 26.05 |
 | `nixos-vm-docker` | Headless VM, Docker, NFS mounts | 23.11 |
 
 ---
