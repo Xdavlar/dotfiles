@@ -19,6 +19,7 @@
 
     # Programs
     cheese
+    devenv
     docker-compose
     drawio
     flameshot
