@@ -77,7 +77,8 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [class=".*"] inhibit_idle fullscreen
 
 bindsym $super+e exec nautilus
-bindsym $super+l exec 'swaylock -l -i $sleep-bg' 
+bindsym $super+l exec 'swaylock -l -i $sleep-bg'
+bindsym $super+Shift+a exec ~/dotfiles/linux/scripts/sink-switcher.sh
 
 ### Key bindings
 #
