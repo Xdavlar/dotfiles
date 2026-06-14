@@ -26,6 +26,9 @@
           };
         };
 
+        # Important for all the $(hostname) configuration to work
+        networking.hostName = "nixos-vm-docker";
+
         virtualisation.docker.enable = true;
 
         console.keyMap = "sv-latin1";
