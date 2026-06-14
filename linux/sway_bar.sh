@@ -9,6 +9,8 @@ date_formatted=$(date "+%a %F %H:%M")
 
 volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}')
 
+audio_output=$(pactl get-default-sink | sed 's/.*\.//')
+
 ram_percent=$(free | awk '/^Mem:/ {printf "%.0f%%", $3/$2 * 100}')
 
 disk_percent=$(df -h / | awk 'NR==2 {print $5}')
@@ -21,8 +23,9 @@ linux_version=$(uname -r | cut -d '-' -f1)
 
 # Emojis and characters for the status bar
 # 💎 💻 💡 🔌 ⚡ 📁 🔈 🎞️ ⛃ ⛁ 🌡️ 🌐\|
-printf "🔈 %s | ⛃ %s | 🎞️ %s | %s ↑ | 🌡️ %s | 🌐 %s | %s 🐧 | %s" \
+printf "🔈 %s (%s) | ⛃ %s | 🎞️ %s | %s ↑ | 🌡️ %s | 🌐 %s | %s 🐧 | %s" \
     "$volume" \
+    "$audio_output" \
     "$disk_percent" \
     "$ram_percent" \
     "$uptime_formatted" \

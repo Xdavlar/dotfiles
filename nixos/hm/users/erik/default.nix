@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ../../modules/shell/bash.nix
+    ../../modules/shell/fzf.nix
     ../../modules/shell/git.nix
     ../../modules/shell/zoxide.nix
     ../../modules/programs/vim.nix

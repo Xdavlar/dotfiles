@@ -48,6 +48,17 @@
           alsa.enable = true;
           alsa.support32Bit = true;
           pulse.enable = true;
+          # Fix broken sensing of Lineout on MSI-motherboard
+          wireplumber.extraConfig."51-alc1220-lineout" = {
+            "monitor.alsa.rules" = [
+              {
+                matches = [
+                  { "device.name" = "alsa_card.pci-0000_31_00.4"; }
+                ];
+                actions.update-props."api.acp.auto-port" = false;
+              }
+            ];
+          };
         };
         security.rtkit.enable = true;
 
@@ -58,7 +69,7 @@
         users.users.erik = {
           isNormalUser = true;
           description = "erik";
-          extraGroups = ["networkmanager" "wheel" "docker" "kvm"];
+          extraGroups = ["networkmanager" "wheel" "docker" "kvm" "video"];
         };
 
         users.users.maria = {

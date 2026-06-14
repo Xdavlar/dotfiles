@@ -13,6 +13,7 @@
           inherit system;
           config.allowUnfree = true;
         };
+        claude-code = inputs.claude-code.packages.${system}.default;
       };
       inherit modules;
     };

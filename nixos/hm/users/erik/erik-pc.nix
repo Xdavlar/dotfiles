@@ -1,4 +1,4 @@
-{pkgs, pkgs-unstable, ...}: {
+{pkgs, pkgs-unstable, claude-code, ...}: {
   imports = [
     ./default.nix
     ../../modules/programs/alacritty.nix
@@ -18,7 +18,7 @@
     wmctrl
 
     # Programs
-    cheese
+    snapshot
     devenv
     docker-compose
     drawio
@@ -27,6 +27,7 @@
     libreoffice
     pandoc
     pinta
+    pwvucontrol
     python314
     qemu_kvm
     texliveSmall
@@ -40,9 +41,10 @@
     lazygit
     tree-sitter
 
+    claude-code
+
     # Unstable
     pkgs-unstable.bitwarden-desktop
-    pkgs-unstable.claude-code
     pkgs-unstable.discord
     pkgs-unstable.google-chrome
     pkgs-unstable.obsidian

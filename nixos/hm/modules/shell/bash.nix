@@ -2,7 +2,7 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u:\W]\$\[\033[0m\] "
+      export PS1="\n\[\033[1;32m\][\[\e]0;\u@\h: \w\a\]\u@\h:\W]\$\[\033[0m\] "
       PATH=~/bin:$PATH
       EDITOR=vim
 
@@ -39,7 +39,7 @@
       hm-switch = "home-manager switch -b backup --flake ~/dotfiles/nixos#$(whoami)@$(hostname)";
       start-time-blame = "systemd-analyze blame --user";
       me = "echo $(whoami)@$(hostname)";
-      vf = "vim $(fzf)";
+      vf = "vim $(fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}')";
     };
   };
 }
