@@ -23,6 +23,7 @@
         sddm.enable = true;
         plasma6.enable = true;
         languagetool.enable = true;
+        steam.enable = true;
 
         networking.hostName = "erik-pc";
 
