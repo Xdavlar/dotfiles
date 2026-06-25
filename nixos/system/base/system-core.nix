@@ -10,6 +10,7 @@
       git-lfs
       htop
       ripgrep
+      ripgrep-all
       shellcheck
       tldr
       tree
