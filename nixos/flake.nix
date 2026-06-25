@@ -3,6 +3,7 @@
 
   inputs = {
     claude-code.url = "github:sadjow/claude-code-nix";
+    finna.url = "git+file:///home/erik/dev/search-solution";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";

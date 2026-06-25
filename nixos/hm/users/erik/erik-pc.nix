@@ -6,6 +6,7 @@
     ../../modules/programs/vscode.nix
     ../../modules/desktop/sway.nix
     ../../modules/programs/firefox.nix
+    ../../modules/programs/finna.nix
   ];
 
   home.stateVersion = "25.11";

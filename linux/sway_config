@@ -75,6 +75,7 @@ seat * xcursor_theme Adwaita 24
 # Inhibit idle (screen lock) when any window is fullscreen (e.g. gaming with controller)
 for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [class=".*"] inhibit_idle fullscreen
+for_window [app_id="finna"] floating enable, resize set 760 440, move position center
 
 bindsym $super+e exec nautilus
 bindsym $super+l exec 'swaylock -l -i $sleep-bg'
@@ -89,6 +90,8 @@ bindsym $super+Shift+a exec ~/dotfiles/linux/scripts/sink-switcher.sh
 
     # Start the launcher
     bindsym $mod+x exec $menu
+    # finna (dogfooding alongside rofi)
+    bindsym $mod+z exec finna gui
 
     bindsym $mod+Shift+q kill
     # Drag floating windows by holding down $mod and left mouse button.

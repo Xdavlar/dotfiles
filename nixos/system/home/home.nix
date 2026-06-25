@@ -14,6 +14,7 @@
           config.allowUnfree = true;
         };
         claude-code = inputs.claude-code.packages.${system}.default;
+        finna = inputs.finna.packages.${system}.default;
       };
       inherit modules;
     };
