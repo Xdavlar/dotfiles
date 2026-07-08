@@ -1,5 +1,10 @@
-{ ... }: {
-  flake.nixosModules.i3wm = { pkgs, lib, config, ... }: {
+{...}: {
+  flake.nixosModules.i3wm = {
+    pkgs,
+    lib,
+    config,
+    ...
+  }: {
     options.i3wm = {
       enable = lib.mkEnableOption "i3 window manager";
 

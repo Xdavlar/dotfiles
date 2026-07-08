@@ -1,5 +1,5 @@
-{ ... }: {
-  flake.nixosModules.system-core = { pkgs, ... }: {
+{...}: {
+  flake.nixosModules.system-core = {pkgs, ...}: {
     environment.systemPackages = with pkgs; [
       alejandra
       bat

@@ -1,5 +1,9 @@
-{ ... }: {
-  flake.nixosModules.steam = { lib, config, ... }: {
+{...}: {
+  flake.nixosModules.steam = {
+    lib,
+    config,
+    ...
+  }: {
     options.steam.enable = lib.mkEnableOption "enables Steam";
 
     config = lib.mkIf config.steam.enable {

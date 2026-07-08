@@ -1,5 +1,5 @@
-{ finna, ... }: {
-  home.packages = [ finna ];
+{finna, ...}: {
+  home.packages = [finna];
 
   # Index daemon: initial scan, then live inotify watch. Keeps the GUI/TUI
   # index fresh. Re-run `finna index` after installing new apps (nix profile
@@ -10,6 +10,6 @@
       ExecStart = "${finna}/bin/finna daemon";
       Restart = "on-failure";
     };
-    Install.WantedBy = [ "default.target" ];
+    Install.WantedBy = ["default.target"];
   };
 }

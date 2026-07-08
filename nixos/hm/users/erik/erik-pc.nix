@@ -1,4 +1,9 @@
-{pkgs, pkgs-unstable, claude-code, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  claude-code,
+  ...
+}: {
   imports = [
     ./default.nix
     ../../modules/programs/alacritty.nix

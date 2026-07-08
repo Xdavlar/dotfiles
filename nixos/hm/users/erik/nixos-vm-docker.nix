@@ -1,4 +1,8 @@
-{pkgs, pkgs-unstable, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   imports = [./default.nix];
 
   home.stateVersion = "23.11";

@@ -1,5 +1,9 @@
-{config, pkgs, ...}: {
-  home.packages = [ pkgs.alacritty ];
+{
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.alacritty];
 
   xdg.configFile."alacritty/alacritty.toml".source =
     config.lib.file.mkOutOfStoreSymlink

@@ -1,5 +1,9 @@
-{ ... }: {
-  flake.nixosModules.sddm = { lib, config, ... }: {
+{...}: {
+  flake.nixosModules.sddm = {
+    lib,
+    config,
+    ...
+  }: {
     options.sddm.enable = lib.mkEnableOption "SDDM display manager";
 
     config = lib.mkIf config.sddm.enable {

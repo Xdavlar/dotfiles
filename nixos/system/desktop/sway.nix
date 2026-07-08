@@ -1,5 +1,10 @@
-{ ... }: {
-  flake.nixosModules.sway = { lib, pkgs, config, ... }: {
+{...}: {
+  flake.nixosModules.sway = {
+    lib,
+    pkgs,
+    config,
+    ...
+  }: {
     options.sway.enable = lib.mkEnableOption "enables sway window manager";
 
     config = lib.mkIf config.sway.enable {
@@ -13,7 +18,7 @@
       xdg.portal = {
         enable = true;
         wlr.enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        extraPortals = [pkgs.xdg-desktop-portal-gtk];
       };
     };
   };

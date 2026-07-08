@@ -1,5 +1,9 @@
-{ ... }: {
-  flake.nixosModules.localization_swe = { lib, config, ... }: {
+{...}: {
+  flake.nixosModules.localization_swe = {
+    lib,
+    config,
+    ...
+  }: {
     options.localization_swe.enable = lib.mkEnableOption "enables swedish localization";
 
     config = lib.mkIf config.localization_swe.enable {

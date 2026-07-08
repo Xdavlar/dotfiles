@@ -1,4 +1,8 @@
-{config, pkgs-unstable, ...}: {
+{
+  config,
+  pkgs-unstable,
+  ...
+}: {
   home.packages = [pkgs-unstable.neovim];
 
   xdg.configFile."nvim".source =
