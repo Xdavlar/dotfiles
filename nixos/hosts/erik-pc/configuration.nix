@@ -31,7 +31,8 @@
         boot.loader.efi.canTouchEfiVariables = true;
         boot.initrd.kernelModules = ["usb_storage" "uas" "sd_mod"];
         boot.kernelModules = ["kvm-amd"];
-        boot.kernelParams = ["rootdelay=5"];
+        boot.kernelParams = ["rootdelay=5" "usbcore.autosuspend=-1"];
+        boot.kernelPackages = pkgs.linuxPackages_7_0;
 
         hardware.graphics.enable = true;
 
@@ -54,7 +55,7 @@
             "monitor.alsa.rules" = [
               {
                 matches = [
-                  { "device.name" = "alsa_card.pci-0000_31_00.4"; }
+                  {"device.name" = "alsa_card.pci-0000_31_00.4";}
                 ];
                 actions.update-props."api.acp.auto-port" = false;
               }
