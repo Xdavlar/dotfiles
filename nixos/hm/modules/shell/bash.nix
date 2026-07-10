@@ -40,6 +40,7 @@
       start-time-blame = "systemd-analyze blame --user";
       me = "echo $(whoami)@$(hostname)";
       vf = "vim $(fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}')";
+      os-age = ''echo $(( ( $(date +%s) - $(date -d "$(stat --format=%w /)" +%s) ) / 86400 )) days'';
     };
   };
 }
