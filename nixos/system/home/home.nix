@@ -12,6 +12,8 @@
         pkgs-unstable = import inputs.nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
+          # bitwarden-desktop still pins electron-39.8.10 (EOL) in both channels
+          config.permittedInsecurePackages = ["electron-39.8.10"];
         };
         claude-code = inputs.claude-code.packages.${system}.default;
         finna = inputs.finna.packages.${system}.default;

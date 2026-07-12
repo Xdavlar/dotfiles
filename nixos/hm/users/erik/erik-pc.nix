@@ -27,7 +27,6 @@
     snapshot
     devenv
     docker-compose
-    drawio
     flameshot
     headsetcontrol
     libreoffice
@@ -52,6 +51,7 @@
     # Unstable
     pkgs-unstable.bitwarden-desktop
     pkgs-unstable.discord
+    pkgs-unstable.drawio
     pkgs-unstable.google-chrome
     pkgs-unstable.obsidian
     pkgs-unstable.signal-desktop
