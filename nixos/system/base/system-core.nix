@@ -13,6 +13,7 @@
       ripgrep-all
       shellcheck
       tldr
+      tmux
       tree
       vim
       wget
