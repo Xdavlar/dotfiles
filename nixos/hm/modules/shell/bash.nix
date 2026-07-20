@@ -31,6 +31,7 @@
       l = "ls -CF";
       la = "ls -lhAF";
       ll = "ls -lhF";
+      py = "python";
       ls = "ls --color=auto";
       lsd = "ls -d */";
       me = "echo $(whoami)@$(hostname)";
