@@ -32,7 +32,7 @@
         boot.initrd.kernelModules = ["usb_storage" "uas" "sd_mod"];
         boot.kernelModules = ["kvm-amd"];
         boot.kernelParams = ["rootdelay=5" "usbcore.autosuspend=-1"];
-        boot.kernelPackages = pkgs.linuxPackages_7_0;
+        boot.kernelPackages = pkgs.linuxPackages_latest;
 
         hardware.graphics.enable = true;
 
