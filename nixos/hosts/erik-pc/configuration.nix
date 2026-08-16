@@ -40,33 +40,35 @@
 
         console.keyMap = "sv-latin1";
 
-        services.printing.enable = true;
-
         virtualisation.docker.enable = true;
 
-        services.pulseaudio.enable = false;
-        services.pipewire = {
-          enable = true;
-          alsa.enable = true;
-          alsa.support32Bit = true;
-          pulse.enable = true;
-          # Fix broken sensing of Lineout on MSI-motherboard
-          wireplumber.extraConfig."51-alc1220-lineout" = {
-            "monitor.alsa.rules" = [
-              {
-                matches = [
-                  {"device.name" = "alsa_card.pci-0000_31_00.4";}
-                ];
-                actions.update-props."api.acp.auto-port" = false;
-              }
-            ];
-          };
-        };
         security.rtkit.enable = true;
 
-        services.dbus.implementation = "broker";
-        services.gnome.gnome-keyring.enable = true;
-        services.tailscale.enable = true;
+        services = {
+          printing.enable = true;
+          pulseaudio.enable = false;
+          pipewire = {
+            enable = true;
+            alsa.enable = true;
+            alsa.support32Bit = true;
+            pulse.enable = true;
+            # Fix broken sensing of Lineout on MSI-motherboard
+            wireplumber.extraConfig."51-alc1220-lineout" = {
+              "monitor.alsa.rules" = [
+                {
+                  matches = [
+                    {"device.name" = "alsa_card.pci-0000_31_00.4";}
+                  ];
+                  actions.update-props."api.acp.auto-port" = false;
+                }
+              ];
+            };
+          };
+          dbus.implementation = "broker";
+          gnome.gnome-keyring.enable = true;
+          tailscale.enable = true;
+          openssh.enable = true;
+        };
 
         users.users.erik = {
           isNormalUser = true;
@@ -96,8 +98,6 @@
         ];
 
         programs.dconf.enable = true;
-
-        services.openssh.enable = true;
 
         system.stateVersion = "25.11";
       })
