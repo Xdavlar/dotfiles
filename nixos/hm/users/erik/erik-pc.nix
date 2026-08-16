@@ -68,7 +68,7 @@
     enable = true;
     automount = true;
     notify = true;
-    tray = false; # no systray in the sway config
+    tray = "never"; # no systray in the sway config
   };
 
   xdg.configFile."mako/config".text = ''
