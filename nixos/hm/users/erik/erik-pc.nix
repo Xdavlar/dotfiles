@@ -24,7 +24,7 @@
     wmctrl
 
     # Programs
-    snapshot
+    cura-appimage
     devenv
     docker-compose
     flameshot
@@ -35,6 +35,7 @@
     pwvucontrol
     python314
     qemu_kvm
+    snapshot
     texliveSmall
     thunderbird
     unzip
