@@ -12,6 +12,7 @@
       config.flake.nixosModules.sddm
       config.flake.nixosModules.plasma6
       config.flake.nixosModules.i3wm
+      config.flake.nixosModules.removable-media
       config.flake.nixosModules.steam
       config.flake.nixosModules.languagetool
       ./hardware-configuration.nix
@@ -22,6 +23,7 @@
         sway.enable = true;
         sddm.enable = true;
         plasma6.enable = true;
+        removable-media.enable = true;
         languagetool.enable = true;
         steam.enable = true;
 

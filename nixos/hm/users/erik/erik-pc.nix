@@ -62,6 +62,15 @@
     libnotify
   ];
 
+  # Auto-mounts SD cards / USB sticks in sway and i3 sessions (plasma has its
+  # own device notifier). Needs services.udisks2 on the system side.
+  services.udiskie = {
+    enable = true;
+    automount = true;
+    notify = true;
+    tray = false; # no systray in the sway config
+  };
+
   xdg.configFile."mako/config".text = ''
     [app-name=flameshot summary="Flameshot Info"]
     invisible=1
