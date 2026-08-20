@@ -1,6 +1,7 @@
 {
   description = "Erik's NixOS configuration";
 
+  # To update any input use: nix flake update <input>
   inputs = {
     claude-code.url = "github:sadjow/claude-code-nix";
     finna.url = "git+file:///home/erik/dev/search-solution";
