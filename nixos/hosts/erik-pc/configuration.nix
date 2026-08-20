@@ -70,7 +70,7 @@
           gnome.gnome-keyring.enable = true;
           tailscale.enable = true;
           openssh.enable = true;
-          logind.setting.Login = {
+          logind.settings.Login = {
             HandlePowerKey = "ignore";
             HandlePowerKeyLongPress = "poweroff";
           };
