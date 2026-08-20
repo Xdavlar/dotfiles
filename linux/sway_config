@@ -89,9 +89,9 @@ bindsym $super+Shift+a exec ~/dotfiles/linux/scripts/sink-switcher.sh
     bindsym $mod+Return exec $term 
 
     # Start the launcher
-    bindsym $mod+x exec $menu
+    bindsym $mod+z exec $menu
     # finna (dogfooding alongside rofi)
-    bindsym $mod+z exec finna gui
+    bindsym $mod+x exec finna gui
 
     bindsym $mod+Shift+q kill
     # Drag floating windows by holding down $mod and left mouse button.
