@@ -39,6 +39,7 @@
     texliveSmall
     thunderbird
     unzip
+    vlc
     zathura
 
     # Dev
