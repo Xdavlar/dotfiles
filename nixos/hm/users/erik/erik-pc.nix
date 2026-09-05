@@ -35,6 +35,7 @@
     pwvucontrol
     python314
     qemu_kvm
+    qview
     snapshot
     texliveSmall
     thunderbird
