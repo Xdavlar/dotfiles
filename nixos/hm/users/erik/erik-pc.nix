@@ -12,6 +12,7 @@
     ../../modules/desktop/sway.nix
     ../../modules/programs/firefox.nix
     ../../modules/programs/finna.nix
+    ../../modules/programs/gameshell.nix
   ];
 
   home.stateVersion = "25.11";
