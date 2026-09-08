@@ -13,6 +13,14 @@
       find_large_files() {
         find . -type f -printf '%s %p\n' | sort -rn | head -''${1:-10}
       }
+
+      # Quick one-shot question to Sonnet, no tools/config loading.
+      ask() {
+        claude -p --model sonnet --effort low --safe-mode --tools "" \
+          --no-session-persistence \
+          --append-system-prompt "Answer briefly and directly in plain text. No markdown, no preamble." \
+          "$*"
+      }
     '';
     shellAliases = {
       ".." = "cd ..";
