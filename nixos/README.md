@@ -10,48 +10,66 @@ Flake-based NixOS config using [flake-parts](https://github.com/hercules-ci/flak
 
 ```
 nixos/
-├── flake.nix                        # Inputs + flake-parts wiring
+├── flake.nix                        # Inputs + flake-parts wiring; lists the host files
 ├── flake.lock                       # Pinned input versions
-├── hosts/                           # Per-machine hardware config
-│   ├── erik-pc/
-│   └── nixos-vm-docker/
-├── modules/                         # NixOS system modules (auto-imported by import-tree)
+├── hosts/                           # One directory per machine
+│   ├── kratos/
+│   │   ├── configuration.nix        # hostName + users literals, module list, system config
+│   │   ├── hardware-configuration.nix
+│   │   └── crow-local.pem
+│   └── atlas/
+│       ├── configuration.nix
+│       └── hardware-configuration.nix
+├── pkgs/                            # Local packages
+│   └── gameshell/
+├── system/                          # NixOS system modules (auto-imported by import-tree)
 │   ├── base/
 │   │   └── system-core.nix          # System packages available to all users
-│   ├── configurations/
-│   │   ├── erik-pc.nix              # erik-pc host definition
-│   │   └── nixos-vm-docker.nix      # nixos-vm-docker host definition
-│   ├── desktop/
-│   │   ├── sway.nix                 # Sway WM (system-level: greetd, programs.sway)
-│   │   └── i3wm.nix                 # i3 WM (system-level)
+│   ├── desktop/                     # sway, i3wm, plasma6, sddm, removable-media
+│   ├── gaming/
+│   │   └── steam.nix
 │   ├── home/
-│   │   └── home.nix                 # Flake-parts glue: registers HM NixOS module + homeConfigurations
-│   └── locale/
-│       └── localization_swe.nix     # Swedish locale/timezone
-└── home/                            # Home-manager config (NOT auto-imported)
+│   │   └── home.nix                 # flake.lib.mkHome / mkHomesFor + homeConfigurations option
+│   ├── locale/
+│   │   └── localization_swe.nix     # Swedish locale/timezone
+│   └── programs/
+│       └── languagetool.nix
+└── hm/                              # Home-manager config (NOT auto-imported)
     ├── users/
-    │   └── erik/
-    │       ├── default.nix          # Base profile: shell, git, vim, nano, common packages
-    │       ├── erik-pc.nix          # Desktop overlay: GUI apps, sway, neovim, vscode, alacritty
-    │       └── nixos-vm-docker.nix  # VM overlay: docker-compose, atuin
+    │   ├── erik/
+    │   │   ├── default.nix          # Base profile: shell, git, vim, nano, common packages
+    │   │   ├── kratos.nix           # Desktop overlay: GUI apps, sway, neovim, vscode, alacritty
+    │   │   └── atlas.nix            # VM overlay: docker-compose, atuin
+    │   └── maria/
+    │       ├── default.nix
+    │       └── kratos.nix
     └── modules/                     # Reusable HM modules
-        ├── shell/
-        │   ├── bash.nix             # PS1, aliases, bash functions
-        │   └── git.nix              # Git aliases, lfs
-        ├── programs/
-        │   ├── alacritty.nix        # Symlinks ../linux/alacritty.toml
-        │   ├── neovim.nix           # Symlinks ../linux/lazyvim/
-        │   ├── vim.nix              # Symlinks ../linux/vim_config
-        │   ├── vscode.nix           # VS Code + extensions
-        │   └── nano.nix             # ~/.nanorc
+        ├── shell/                   # bash (PS1, aliases), git, fzf, zoxide
+        ├── programs/                # alacritty, neovim, vim, vscode, nano, firefox, finna, gameshell
         └── desktop/
             └── sway.nix             # User sway packages + symlinks sway_config/sway_bar.sh
 ```
 
-**Key rule**: anything under `modules/` is auto-imported by import-tree as a flake-parts module.
-`home/` lives outside `modules/` intentionally — it's plain HM config, not flake-parts modules.
+## Host naming
 
-New `.nix` files added to `modules/` must be **`git add`ed** before rebuilding, or Nix won't see them.
+Each host writes its name once, at the top of `hosts/<host>/configuration.nix`:
+
+```nix
+hostName = "kratos";
+users = ["erik" "maria"];
+```
+
+The flake output attribute, `networking.hostName`, and the host's
+`<user>@<host>` home-manager configurations all derive from those two lines,
+so `rg 'hostName = '` lists every host. Renaming a host means editing the
+literal, `git mv`-ing the host directory and the matching
+`hm/users/<user>/<host>.nix` profiles, and updating the import path in
+`flake.nix`.
+
+**Key rule**: anything under `system/` is auto-imported by import-tree as a flake-parts module.
+`hm/` lives outside `system/` intentionally — it's plain HM config, not flake-parts modules.
+
+New `.nix` files added to `system/` must be **`git add`ed** before rebuilding, or Nix won't see them.
 
 ---
 
@@ -70,7 +88,7 @@ Opens your host config in `$EDITOR`, formats on save, rebuilds, and sends a desk
 
 ```sh
 cd ~/dotfiles/nixos
-sudo nixos-rebuild switch --flake .#erik-pc
+sudo nixos-rebuild switch --flake .#kratos
 ```
 
 ### Update home-manager only (no sudo)
@@ -86,7 +104,7 @@ home-manager switch --flake .#erik
 cd ~/dotfiles/nixos
 nix flake update           # Update all inputs
 nix flake update nixpkgs   # Update a single input
-sudo nixos-rebuild switch --flake .#erik-pc
+sudo nixos-rebuild switch --flake .#kratos
 ```
 
 ### Roll back after a bad update
@@ -103,16 +121,16 @@ home-manager switch --flake .#erik --switch-generation <N>
 
 | Where | What to edit |
 |-------|-------------|
-| Available system-wide (all users) | `modules/base/system-core.nix` |
-| Your user packages (desktop) | `home/users/erik/erik-pc.nix` → `home.packages` |
-| Your user packages (VM) | `home/users/erik/nixos-vm-docker.nix` → `home.packages` |
+| Available system-wide (all users) | `system/base/system-core.nix` |
+| Your user packages (desktop) | `hm/users/erik/kratos.nix` → `home.packages` |
+| Your user packages (VM) | `hm/users/erik/atlas.nix` → `home.packages` |
 | Unstable packages | Use `pkgs-unstable.<name>` — already available as `extraSpecialArgs` |
 
 ---
 
 ## Adding a New Module
 
-1. Create a `.nix` file anywhere under `modules/`
+1. Create a `.nix` file anywhere under `system/`
 2. `git add` it (required — import-tree only sees tracked files)
 3. Export it as `flake.nixosModules.<name>`
 4. Import it in the relevant host configuration
@@ -136,8 +154,8 @@ Example skeleton:
 
 | Host | Description | State version |
 |------|-------------|---------------|
-| `erik-pc` | Desktop, Sway WM, full GUI stack | 26.05 |
-| `nixos-vm-docker` | Headless VM, Docker, NFS mounts | 23.11 |
+| `kratos` | Desktop, Sway WM, full GUI stack | 26.05 |
+| `atlas` | Headless VM, Docker, NFS mounts | 23.11 |
 
 ---
 

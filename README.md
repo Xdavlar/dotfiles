@@ -45,13 +45,13 @@ nix run home-manager -- switch -b backup --flake ~/dotfiles/nixos#<user>@<host>
 
 | Host | Description |
 |------|-------------|
-| `erik-pc` | Desktop (sway, full GUI stack) |
-| `nixos-vm-docker` | Headless VM (docker, NFS mounts) |
+| `kratos` | Desktop (sway, full GUI stack) |
+| `atlas` | Headless VM (docker, NFS mounts) |
 
 ## Home Manager Configurations
 
 | Config | Description |
 |--------|-------------|
-| `erik@erik-pc` | Desktop user (GUI apps, sway, neovim, vscode) |
-| `erik@nixos-vm-docker` | VM user (docker-compose, atuin) |
-| `maria@erik-pc` | Desktop user (firefox) |
+| `erik@kratos` | Desktop user (GUI apps, sway, neovim, vscode) |
+| `erik@atlas` | VM user (docker-compose, atuin) |
+| `maria@kratos` | Desktop user (firefox) |

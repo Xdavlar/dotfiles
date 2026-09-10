@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  hostName = "nixos-vm-docker";
+  hostName = "atlas";
   users = ["erik"];
 in {
   flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {

@@ -22,8 +22,9 @@
 
       imports = [
         (inputs.import-tree ./system)
-        ./hosts/erik-pc/configuration.nix
-        ./hosts/nixos-vm-docker/configuration.nix
+        ./hosts/kratos/configuration.nix
+        ./hosts/atlas/configuration.nix
+        ./hosts/legacy-aliases.nix
       ];
     };
 }

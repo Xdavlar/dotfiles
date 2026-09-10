@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  hostName = "erik-pc";
+  hostName = "kratos";
   users = ["erik" "maria"];
 in {
   flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {
