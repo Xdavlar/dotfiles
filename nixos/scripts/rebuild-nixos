@@ -6,7 +6,7 @@ set -e
 pushd ~/dotfiles/nixos/
 
 # Edit your config
-$EDITOR "modules/configurations/$HOSTNAME.nix"
+$EDITOR "hosts/$HOSTNAME/configuration.nix"
 
 if git diff --quiet '*.nix'; then
     echo "No changes detected, exiting."
