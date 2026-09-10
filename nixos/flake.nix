@@ -24,7 +24,6 @@
         (inputs.import-tree ./system)
         ./hosts/kratos/configuration.nix
         ./hosts/atlas/configuration.nix
-        ./hosts/legacy-aliases.nix
       ];
     };
 }
