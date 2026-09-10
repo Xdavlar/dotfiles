@@ -2,8 +2,11 @@
   config,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations.erik-pc = inputs.nixpkgs.lib.nixosSystem {
+}: let
+  hostName = "erik-pc";
+  users = ["erik" "maria"];
+in {
+  flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.system-core
@@ -26,7 +29,7 @@
         removable-media.enable = true;
         languagetool.enable = true;
 
-        networking.hostName = "erik-pc";
+        networking.hostName = hostName;
 
         boot.loader.systemd-boot.enable = true;
         boot.loader.efi.canTouchEfiVariables = true;
@@ -108,4 +111,6 @@
       })
     ];
   };
+
+  flake.homeConfigurations = config.flake.lib.mkHomesFor hostName users;
 }

@@ -1,4 +1,9 @@
-{inputs, ...}: let
+{
+  inputs,
+  lib,
+  flake-parts-lib,
+  ...
+}: let
   mkHome = {
     system ? "x86_64-linux",
     modules,
@@ -21,9 +26,26 @@
       inherit modules;
     };
 in {
-  flake.homeConfigurations = {
-    "erik@erik-pc" = mkHome {modules = [../../hm/users/erik/erik-pc.nix];};
-    "erik@nixos-vm-docker" = mkHome {modules = [../../hm/users/erik/nixos-vm-docker.nix];};
-    "maria@erik-pc" = mkHome {modules = [../../hm/users/maria/erik-pc.nix];};
+  # flake-parts does not declare `flake.homeConfigurations`, so without an
+  # option for it only one module could ever define it. Declaring it lets each
+  # host contribute its own users' configurations.
+  options.flake = flake-parts-lib.mkSubmoduleOptions {
+    homeConfigurations = lib.mkOption {
+      type = lib.types.lazyAttrsOf lib.types.raw;
+      default = {};
+    };
+  };
+
+  config.flake.lib = {
+    inherit mkHome;
+
+    # Builds the "<user>@<host>" home configurations for one host, each from
+    # hm/users/<user>/<host>.nix. Hosts call this from their own file.
+    mkHomesFor = hostName: users:
+      builtins.listToAttrs (map (user: {
+          name = "${user}@${hostName}";
+          value = mkHome {modules = [(../../hm/users + "/${user}/${hostName}.nix")];};
+        })
+        users);
   };
 }

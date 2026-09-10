@@ -2,8 +2,11 @@
   config,
   inputs,
   ...
-}: {
-  flake.nixosConfigurations.nixos-vm-docker = inputs.nixpkgs.lib.nixosSystem {
+}: let
+  hostName = "nixos-vm-docker";
+  users = ["erik"];
+in {
+  flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.system-core
@@ -27,7 +30,7 @@
         };
 
         # Important for all the $(hostname) configuration to work
-        networking.hostName = "nixos-vm-docker";
+        networking.hostName = hostName;
 
         virtualisation.docker.enable = true;
 
@@ -62,4 +65,6 @@
       })
     ];
   };
+
+  flake.homeConfigurations = config.flake.lib.mkHomesFor hostName users;
 }
