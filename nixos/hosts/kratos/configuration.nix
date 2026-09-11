@@ -22,6 +22,12 @@ in {
       ({pkgs, ...}: {
         nix.settings.download-buffer-size = 524288000;
 
+        # Prebuilt noctalia, so the C++/meson build never runs locally.
+        nix.settings.extra-substituters = ["https://noctalia.cachix.org"];
+        nix.settings.extra-trusted-public-keys = [
+          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+        ];
+
         localization_swe.enable = true;
         sway.enable = true;
         sddm.enable = true;
