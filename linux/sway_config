@@ -45,6 +45,10 @@ exec systemctl --user set-environment UPOWER_ENABLED=0
 
 exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
 
+# Desktop shell: bar, tray, control center (see linux/sway_bar.sh for the
+# status line this replaced).
+exec noctalia
+
 ### Input configuration
 input type:keyboard {
     xkb_layout se
@@ -77,9 +81,14 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id="finna"] floating enable, resize set 760 440, move position center
 
+set $ipc noctalia msg
+
 bindsym $super+e exec nautilus
 bindsym $super+l exec 'swaylock -l -i $sleep-bg'
 bindsym $super+Shift+a exec ~/dotfiles/linux/scripts/sink-switcher.sh
+bindsym $super+n exec $ipc panel-toggle control-center
+bindsym $super+v exec $ipc panel-toggle clipboard
+bindsym $super+comma exec $ipc settings-toggle
 
 ### Key bindings
 #
@@ -228,33 +237,20 @@ bindsym $mod+r mode "resize"
 # Utilities:
 #
     # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-    # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym --locked XF86AudioMute exec $ipc volume-mute
+    bindsym --locked XF86AudioLowerVolume exec $ipc volume-down
+    bindsym --locked XF86AudioRaiseVolume exec $ipc volume-up
+    bindsym --locked XF86AudioMicMute exec $ipc mic-mute
+    # Special keys to adjust brightness
+    bindsym --locked XF86MonBrightnessDown exec $ipc brightness-down
+    bindsym --locked XF86MonBrightnessUp exec $ipc brightness-up
     bindsym Print exec flameshot gui
     bindsym --whole-window $mod+button4 workspace prev
     bindsym --whole-window $mod+button5 workspace next
 #
 # Status Bar:
 #
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-    
-    # status_command i3status
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-    status_command while ~/.config/sway/sway_bar.sh; do sleep 1; done
-    #status_command while echo "Hi"; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+# Handled by noctalia (see `exec noctalia` above). The old sway bar and its
+# status_command lived here; linux/sway_bar.sh still has that status line.
 
 include @sysconfdir@/sway/config.d/*
