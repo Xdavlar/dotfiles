@@ -10,6 +10,9 @@
     nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    # Deliberately not following nixpkgs: the upstream binary cache
+    # (noctalia.cachix.org) is only valid for their own nixpkgs pin.
+    noctalia.url = "github:noctalia-dev/noctalia";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
