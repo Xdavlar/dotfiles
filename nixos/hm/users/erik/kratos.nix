@@ -9,6 +9,7 @@
     ../../modules/programs/alacritty.nix
     ../../modules/programs/neovim.nix
     ../../modules/programs/vscode.nix
+    ../../modules/desktop/noctalia.nix
     ../../modules/desktop/sway.nix
     ../../modules/programs/firefox.nix
     ../../modules/programs/finna.nix
