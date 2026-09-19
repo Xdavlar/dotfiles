@@ -18,7 +18,8 @@
           inherit system;
           config.allowUnfree = true;
           # bitwarden-desktop still pins electron-39.8.10 (EOL) in both channels
-          config.permittedInsecurePackages = ["electron-39.8.10"];
+          # winboat 9.2 uses electron 40.10.5
+          config.permittedInsecurePackages = ["electron-39.8.10" "electron-40.10.5"];
         };
         claude-code = inputs.claude-code.packages.${system}.default;
         finna = inputs.finna.packages.${system}.default;

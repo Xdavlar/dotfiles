@@ -61,6 +61,7 @@
     pkgs-unstable.obsidian
     pkgs-unstable.signal-desktop
     pkgs-unstable.spotify
+    pkgs-unstable.winboat
 
     # Libraries
     libnotify
