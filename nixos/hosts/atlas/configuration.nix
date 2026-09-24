@@ -45,17 +45,17 @@ in {
 
         fileSystems = {
           "/mnt/Synology/download" = {
-            device = "nas.crow.local:/volume1/downloads";
+            device = "192.168.0.107:/volume1/downloads";
             fsType = "nfs";
             options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
           };
           "/mnt/Synology/media" = {
-            device = "nas.crow.local:/volume1/media";
+            device = "192.168.0.107:/volume1/media";
             fsType = "nfs";
             options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
           };
           "/mnt/Synology/CAD" = {
-            device = "nas.crow.local:/volume1/CAD";
+            device = "192.168.0.107:/volume1/CAD";
             fsType = "nfs";
             options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
           };
