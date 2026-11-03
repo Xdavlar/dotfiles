@@ -44,6 +44,7 @@
     unzip
     vlc
     zathura
+    zellij
 
     # Dev
     fd

@@ -36,7 +36,6 @@ in {
         plasma6.enable = true;
         removable-media.enable = true;
         languagetool.enable = true;
-        steam.enable = true;
 
         networking.hostName = hostName;
 
