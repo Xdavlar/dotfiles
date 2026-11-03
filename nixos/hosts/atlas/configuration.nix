@@ -10,6 +10,7 @@ in {
     system = "x86_64-linux";
     modules = [
       config.flake.nixosModules.system-core
+      config.flake.nixosModules.auto-upgrade
       ./hardware-configuration.nix
       inputs.nixos-vscode-server.nixosModules.default
       ({...}: {

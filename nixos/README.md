@@ -115,6 +115,22 @@ home-manager generations               # List HM generations
 home-manager switch --flake .#erik --switch-generation <N>
 ```
 
+### Atlas auto-update
+
+Atlas imports `system/base/auto-upgrade.nix`. Every night around 04:00 (with up to 30 min random delay, and missed runs caught up) it:
+
+1. resets `flake.lock` and runs `git pull --ff-only` as erik,
+2. runs `nix flake update` for every input except `finna`,
+3. runs `nixos-rebuild switch`, then `home-manager switch` for `erik@atlas`.
+
+The updated `flake.lock` stays on Atlas and is never committed. If Atlas has local commits or edits, the pull fails and nothing is rebuilt.
+
+```sh
+systemctl list-timers nixos-upgrade    # Next scheduled run
+sudo systemctl start nixos-upgrade     # Run now
+journalctl -u nixos-upgrade -f         # Follow the log
+```
+
 ---
 
 ## Adding Packages
