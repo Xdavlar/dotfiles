@@ -28,7 +28,10 @@ in {
           "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
         ];
         nix.settings.auto-optimise-store = true;
-        nix.gc = { automatic = true; dates = "monthly"; };
+        nix.gc = {
+          automatic = true;
+          dates = "monthly";
+        };
 
         localization_swe.enable = true;
         sway.enable = true;

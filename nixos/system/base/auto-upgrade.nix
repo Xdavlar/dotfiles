@@ -13,8 +13,7 @@
     host = config.networking.hostName;
     hm = inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager;
     asUser = cmd: "${pkgs.util-linux}/bin/runuser -l ${user} -c ${lib.escapeShellArg cmd}";
-    # finna is a git+file input that only exists on kratos, so it is left pinned
-    inputsToUpdate = ["claude-code" "flake-parts" "home-manager" "import-tree" "nixos-vscode-server" "nixpkgs" "nixpkgs-unstable" "noctalia"];
+    inputsToUpdate = ["claude-code" "finna" "flake-parts" "home-manager" "import-tree" "nixos-vscode-server" "nixpkgs" "nixpkgs-unstable" "noctalia"];
   in {
     system.autoUpgrade = {
       enable = true;

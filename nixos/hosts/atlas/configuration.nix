@@ -38,7 +38,10 @@ in {
         console.keyMap = "sv-latin1";
         nix.settings.experimental-features = ["nix-command" "flakes"];
         nix.settings.auto-optimise-store = true;
-        nix.gc = { automatic = true; dates = "monthly"; };
+        nix.gc = {
+          automatic = true;
+          dates = "monthly";
+        };
 
         users.users.erik = {
           isNormalUser = true;
