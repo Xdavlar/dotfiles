@@ -87,7 +87,9 @@ in {
             HandlePowerKey = "ignore";
             HandlePowerKeyLongPress = "poweroff";
           };
+          udev.packages = [pkgs.headsetcontrol];
         };
+        environment.systemPackages = [pkgs.headsetcontrol];
 
         users.users.erik = {
           isNormalUser = true;
