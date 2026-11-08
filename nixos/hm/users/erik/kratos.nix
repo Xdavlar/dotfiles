@@ -26,7 +26,6 @@
     wmctrl
 
     # Programs
-    cura-appimage
     devenv
     docker-compose
     flameshot
@@ -55,6 +54,7 @@
     claude-code
 
     # Unstable
+    pkgs-unstable.cura-appimage
     pkgs-unstable.bitwarden-desktop
     pkgs-unstable.discord
     pkgs-unstable.drawio
