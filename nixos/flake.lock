@@ -26,15 +26,15 @@
       "locked": {
         "lastModified": 1793735196,
         "narHash": "sha256-pKY1Za6jovCeZpqDBxwwPhFSWzDj5N/8/6OphcW/SRo=",
-        "ref": "refs/heads/main",
+        "owner": "Davlar",
+        "repo": "finna",
         "rev": "b289054d175bca0d425a9cd492f09d327a4e2503",
-        "revCount": 11,
-        "type": "git",
-        "url": "file:///home/erik/dev/search-finna"
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/erik/dev/search-finna"
+        "owner": "Davlar",
+        "repo": "finna",
+        "type": "gitlab"
       }
     },
     "flake-parts": {

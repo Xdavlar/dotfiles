@@ -4,7 +4,7 @@
   # To update any input use: nix flake update <input>
   inputs = {
     claude-code.url = "github:sadjow/claude-code-nix";
-    finna.url = "git+file:///home/erik/dev/search-finna";
+    finna.url = "gitlab:Davlar/finna";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     nixos-vscode-server.url = "github:nix-community/nixos-vscode-server";
