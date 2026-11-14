@@ -1,6 +1,9 @@
 {noctalia, ...}: {
   imports = [noctalia.homeModules.default];
 
+  # Local plugin (implicit "local" source); see noctalia-plugins/claude_usage.
+  xdg.dataFile."noctalia/plugins/claude_usage".source = ./noctalia-plugins/claude_usage;
+
   programs.noctalia = {
     enable = true;
 
@@ -17,6 +20,7 @@
         start = ["workspaces" "active_window"];
         center = ["clock"];
         end = [
+          "claude-usage"
           "media"
           "tray"
           "cpu-temp"
@@ -29,7 +33,12 @@
         ];
       };
 
+      plugins.enabled = ["erik/claude_usage"];
+
       widget = {
+        # Claude Code session/week usage, ported from sway_bar.sh.
+        claude-usage.type = "erik/claude_usage:usage";
+
         clock.format = "{:%a %F %H:%M}";
 
         # The three readouts sway_bar.sh used to shell out for once a second.

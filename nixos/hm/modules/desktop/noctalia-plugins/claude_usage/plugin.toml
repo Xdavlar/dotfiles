@@ -1,0 +1,12 @@
+id           = "erik/claude_usage"
+name         = "Claude usage"
+version      = "1.0.0"
+plugin_api   = 24 # argv form of noctalia.runAsync ("direct-argv")
+author       = "erik"
+icon         = "robot"
+description  = "Claude Code session/week usage from `claude -p /usage`."
+dependencies = ["claude-code"]
+
+[[widget]]
+id    = "usage"
+entry = "widget.luau"
