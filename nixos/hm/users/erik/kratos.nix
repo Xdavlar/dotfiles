@@ -30,6 +30,7 @@
     docker-compose
     flameshot
     headsetcontrol
+    jellyfin-desktop
     libreoffice
     pandoc
     pinta
