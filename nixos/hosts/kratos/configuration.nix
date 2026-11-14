@@ -118,6 +118,19 @@ in {
           nerd-fonts.ubuntu
         ];
 
+        fileSystems = {
+          "/mnt/Synology/download" = {
+            device = "192.168.0.107:/volume1/downloads";
+            fsType = "nfs";
+            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+          };
+          "/mnt/Synology/media" = {
+            device = "192.168.0.107:/volume1/media";
+            fsType = "nfs";
+            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+          };
+        };
+
         programs.dconf.enable = true;
 
         system.stateVersion = "25.11";
