@@ -90,7 +90,7 @@
   '';
 
   programs.bash.shellAliases = {
-    lock = "swaylock -l -i ~/Pictures/bg-city.jpg 2>/dev/null";
+    lock = "noctalia msg session lock";
     pdf = "zathura";
   };
 }

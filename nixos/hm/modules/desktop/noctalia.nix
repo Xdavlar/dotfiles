@@ -1,4 +1,8 @@
-{noctalia, ...}: {
+{
+  config,
+  noctalia,
+  ...
+}: {
   imports = [noctalia.homeModules.default];
 
   # Local plugin (implicit "local" source); see noctalia-plugins/claude_usage.
@@ -60,6 +64,23 @@
       # swaybg still owns the background (`output * bg` in sway_config);
       # without this noctalia draws its own on top.
       wallpaper.enabled = false;
+
+      # Noctalia's wallpaper is off (swaybg owns it), so the lock screen needs
+      # its own image or it paints black. Lock-before-suspend is on by default.
+      lockscreen.wallpaper = "${config.home.homeDirectory}/dotfiles/images/neon-circle-wp.png";
+
+      # Replaces swayidle. Defining any behavior drops Noctalia's built-in ones,
+      # so action and timeout must be spelled out.
+      idle.behavior = {
+        lock = {
+          action = "lock";
+          timeout = 300;
+        };
+        screen-off = {
+          action = "screen_off";
+          timeout = 600;
+        };
+      };
 
       # mako is still installed and owns org.freedesktop.Notifications; two
       # daemons racing for that bus name is the easiest way to break this.
