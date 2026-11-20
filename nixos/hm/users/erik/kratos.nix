@@ -63,6 +63,8 @@
     pkgs-unstable.obsidian
     pkgs-unstable.signal-desktop
     pkgs-unstable.spotify
+    (pkgs-unstable.aerion.override { withOAuth = true; })
+    pkgs-unstable.gitcomet
     pkgs-unstable.winboat
 
     # Libraries
