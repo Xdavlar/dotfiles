@@ -67,6 +67,10 @@ in {
             alsa.enable = true;
             alsa.support32Bit = true;
             pulse.enable = true;
+            # x11-bell segfaults when on-demand Xwayland exits (pipewire 1.6.6)
+            extraConfig.pipewire."99-disable-x11-bell" = {
+              "context.properties"."module.x11.bell" = false;
+            };
             # Fix broken sensing of Lineout on MSI-motherboard
             wireplumber.extraConfig."51-alc1220-lineout" = {
               "monitor.alsa.rules" = [
