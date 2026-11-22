@@ -1,146 +1,118 @@
-{
-  config,
-  inputs,
-  ...
-}: let
-  hostName = "kratos";
-  users = ["erik" "maria"];
-in {
-  flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
-    modules = [
-      config.flake.nixosModules.system-core
-      config.flake.nixosModules.localization_swe
-      config.flake.nixosModules.sway
-      config.flake.nixosModules.sddm
-      config.flake.nixosModules.plasma6
-      config.flake.nixosModules.i3wm
-      config.flake.nixosModules.removable-media
-      config.flake.nixosModules.steam
-      config.flake.nixosModules.languagetool
-      ./hardware-configuration.nix
-      ({pkgs, ...}: {
-        nix.settings.download-buffer-size = 524288000;
+{pkgs, ...}: {
+  nix.settings.download-buffer-size = 524288000;
 
-        # Prebuilt noctalia, so the C++/meson build never runs locally.
-        nix.settings.extra-substituters = ["https://noctalia.cachix.org"];
-        nix.settings.extra-trusted-public-keys = [
-          "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-        ];
-        nix.settings.auto-optimise-store = true;
-        nix.gc = {
-          automatic = true;
-          dates = "monthly";
-        };
-
-        localization_swe.enable = true;
-        sway.enable = true;
-        sddm.enable = true;
-        plasma6.enable = true;
-        removable-media.enable = true;
-        languagetool.enable = true;
-
-        networking.hostName = hostName;
-
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
-        boot.initrd.kernelModules = ["usb_storage" "uas" "sd_mod"];
-        boot.kernelModules = ["kvm-amd"];
-        boot.kernelParams = ["rootdelay=5" "usbcore.autosuspend=-1"];
-        boot.kernelPackages = pkgs.linuxPackages_latest;
-
-        hardware.graphics.enable = true;
-
-        networking.networkmanager.enable = true;
-
-        console.keyMap = "sv-latin1";
-
-        virtualisation.docker.enable = true;
-
-        security.rtkit.enable = true;
-
-        services = {
-          printing.enable = true;
-          pulseaudio.enable = false;
-          pipewire = {
-            enable = true;
-            alsa.enable = true;
-            alsa.support32Bit = true;
-            pulse.enable = true;
-            # x11-bell segfaults when on-demand Xwayland exits (pipewire 1.6.6)
-            extraConfig.pipewire."99-disable-x11-bell" = {
-              "context.properties"."module.x11.bell" = false;
-            };
-            # Fix broken sensing of Lineout on MSI-motherboard
-            wireplumber.extraConfig."51-alc1220-lineout" = {
-              "monitor.alsa.rules" = [
-                {
-                  matches = [
-                    {"device.name" = "alsa_card.pci-0000_31_00.4";}
-                  ];
-                  actions.update-props."api.acp.auto-port" = false;
-                }
-              ];
-            };
-          };
-          dbus.implementation = "broker";
-          gnome.gnome-keyring.enable = true;
-          tailscale.enable = true;
-          openssh.enable = true;
-          logind.settings.Login = {
-            HandlePowerKey = "ignore";
-            HandlePowerKeyLongPress = "poweroff";
-          };
-          udev.packages = [pkgs.headsetcontrol];
-        };
-        environment.systemPackages = [pkgs.headsetcontrol];
-
-        users.users.erik = {
-          isNormalUser = true;
-          description = "erik";
-          extraGroups = ["networkmanager" "wheel" "docker" "kvm" "video"];
-        };
-
-        users.users.maria = {
-          isNormalUser = true;
-          description = "maria";
-          extraGroups = ["networkmanager"];
-        };
-
-        security.pki.certificateFiles = [
-          ./crow-local.pem
-        ];
-
-        nixpkgs.config.allowUnfree = true;
-        nix.settings.experimental-features = ["nix-command" "flakes"];
-
-        fonts.packages = with pkgs; [
-          nerd-fonts.fira-code
-          nerd-fonts.droid-sans-mono
-          nerd-fonts.noto
-          nerd-fonts.hack
-          nerd-fonts.ubuntu
-        ];
-
-        fileSystems = {
-          "/mnt/Synology/download" = {
-            device = "192.168.0.107:/volume1/downloads";
-            fsType = "nfs";
-            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
-          };
-          "/mnt/Synology/media" = {
-            device = "192.168.0.107:/volume1/media";
-            fsType = "nfs";
-            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
-          };
-        };
-
-        programs.dconf.enable = true;
-
-        system.stateVersion = "25.11";
-      })
-    ];
+  # Prebuilt noctalia, so the C++/meson build never runs locally.
+  nix.settings.extra-substituters = ["https://noctalia.cachix.org"];
+  nix.settings.extra-trusted-public-keys = [
+    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+  ];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
   };
 
-  flake.homeConfigurations = config.flake.lib.mkHomesFor hostName users;
+  localization_swe.enable = true;
+  sway.enable = true;
+  sddm.enable = true;
+  plasma6.enable = true;
+  removable-media.enable = true;
+  languagetool.enable = true;
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = ["usb_storage" "uas" "sd_mod"];
+  boot.kernelModules = ["kvm-amd"];
+  boot.kernelParams = ["rootdelay=5" "usbcore.autosuspend=-1"];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  hardware.graphics.enable = true;
+
+  networking.networkmanager.enable = true;
+
+  console.keyMap = "sv-latin1";
+
+  virtualisation.docker.enable = true;
+
+  security.rtkit.enable = true;
+
+  services = {
+    printing.enable = true;
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # x11-bell segfaults when on-demand Xwayland exits (pipewire 1.6.6)
+      extraConfig.pipewire."99-disable-x11-bell" = {
+        "context.properties"."module.x11.bell" = false;
+      };
+      # Fix broken sensing of Lineout on MSI-motherboard
+      wireplumber.extraConfig."51-alc1220-lineout" = {
+        "monitor.alsa.rules" = [
+          {
+            matches = [
+              {"device.name" = "alsa_card.pci-0000_31_00.4";}
+            ];
+            actions.update-props."api.acp.auto-port" = false;
+          }
+        ];
+      };
+    };
+    dbus.implementation = "broker";
+    gnome.gnome-keyring.enable = true;
+    tailscale.enable = true;
+    openssh.enable = true;
+    logind.settings.Login = {
+      HandlePowerKey = "ignore";
+      HandlePowerKeyLongPress = "poweroff";
+    };
+    udev.packages = [pkgs.headsetcontrol];
+  };
+  environment.systemPackages = [pkgs.headsetcontrol];
+
+  users.users.erik = {
+    isNormalUser = true;
+    description = "erik";
+    extraGroups = ["networkmanager" "wheel" "docker" "kvm" "video"];
+  };
+
+  users.users.maria = {
+    isNormalUser = true;
+    description = "maria";
+    extraGroups = ["networkmanager"];
+  };
+
+  security.pki.certificateFiles = [
+    ./crow-local.pem
+  ];
+
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.droid-sans-mono
+    nerd-fonts.noto
+    nerd-fonts.hack
+    nerd-fonts.ubuntu
+  ];
+
+  fileSystems = {
+    "/mnt/Synology/download" = {
+      device = "192.168.0.107:/volume1/downloads";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+    "/mnt/Synology/media" = {
+      device = "192.168.0.107:/volume1/media";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+  };
+
+  programs.dconf.enable = true;
+
+  system.stateVersion = "25.11";
 }

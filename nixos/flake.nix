@@ -20,13 +20,53 @@
   };
 
   outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: let
+      m = config.flake.nixosModules;
+      inherit (config.flake.lib) mkHomesFor;
+
+      # Every host: shared modules + hosts/<name>/{configuration,hardware-configuration}.nix
+      mkHost = hostName: modules:
+        inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules =
+            modules
+            ++ [
+              ./hosts/${hostName}/hardware-configuration.nix
+              ./hosts/${hostName}/configuration.nix
+              # Important for all the $(hostname) configuration to work
+              {networking.hostName = hostName;}
+            ];
+        };
+    in {
       systems = ["x86_64-linux"];
 
-      imports = [
-        (inputs.import-tree ./system)
-        ./hosts/kratos/configuration.nix
-        ./hosts/atlas/configuration.nix
-      ];
-    };
+      imports = [(inputs.import-tree ./system)];
+
+      flake.nixosConfigurations = {
+        # Desktop
+        kratos = mkHost "kratos" [
+          m.system-core
+          m.localization_swe
+          m.sway
+          m.sddm
+          m.plasma6
+          m.i3wm
+          m.removable-media
+          m.steam
+          m.languagetool
+        ];
+
+        # Home server
+        atlas = mkHost "atlas" [
+          m.system-core
+          m.localization_swe
+          m.auto-upgrade
+          inputs.nixos-vscode-server.nixosModules.default
+        ];
+      };
+
+      flake.homeConfigurations =
+        mkHomesFor "kratos" ["erik" "maria"]
+        // mkHomesFor "atlas" ["erik"];
+    });
 }

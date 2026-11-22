@@ -1,76 +1,53 @@
-{
-  config,
-  inputs,
-  ...
-}: let
-  hostName = "atlas";
-  users = ["erik"];
-in {
-  flake.nixosConfigurations.${hostName} = inputs.nixpkgs.lib.nixosSystem {
-    system = "x86_64-linux";
-    modules = [
-      config.flake.nixosModules.system-core
-      config.flake.nixosModules.auto-upgrade
-      ./hardware-configuration.nix
-      inputs.nixos-vscode-server.nixosModules.default
-      ({...}: {
-        boot.loader.systemd-boot.enable = true;
+{...}: {
+  boot.loader.systemd-boot.enable = true;
 
-        nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
-        services = {
-          sshd.enable = true;
-          tailscale.enable = true;
-          vscode-server.enable = true;
-          cron = {
-            enable = true;
-            systemCronJobs = [
-              "0 0 * * * root docker image prune -a -f"
-            ];
-          };
-        };
-
-        # Important for all the $(hostname) configuration to work
-        networking.hostName = hostName;
-
-        virtualisation.docker.enable = true;
-
-        console.keyMap = "sv-latin1";
-        nix.settings.experimental-features = ["nix-command" "flakes"];
-        nix.settings.auto-optimise-store = true;
-        nix.gc = {
-          automatic = true;
-          dates = "monthly";
-        };
-
-        users.users.erik = {
-          isNormalUser = true;
-          home = "/home/erik";
-          extraGroups = ["wheel" "docker"];
-        };
-
-        fileSystems = {
-          "/mnt/Synology/download" = {
-            device = "192.168.0.107:/volume1/downloads";
-            fsType = "nfs";
-            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
-          };
-          "/mnt/Synology/media" = {
-            device = "192.168.0.107:/volume1/media";
-            fsType = "nfs";
-            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
-          };
-          "/mnt/Synology/CAD" = {
-            device = "192.168.0.107:/volume1/CAD";
-            fsType = "nfs";
-            options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
-          };
-        };
-
-        system.stateVersion = "23.11";
-      })
-    ];
+  services = {
+    sshd.enable = true;
+    tailscale.enable = true;
+    vscode-server.enable = true;
+    cron = {
+      enable = true;
+      systemCronJobs = [
+        "0 0 * * * root docker image prune -a -f"
+      ];
+    };
   };
 
-  flake.homeConfigurations = config.flake.lib.mkHomesFor hostName users;
+  virtualisation.docker.enable = true;
+
+  localization_swe.enable = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "monthly";
+  };
+
+  users.users.erik = {
+    isNormalUser = true;
+    home = "/home/erik";
+    extraGroups = ["wheel" "docker"];
+  };
+
+  fileSystems = {
+    "/mnt/Synology/download" = {
+      device = "192.168.0.107:/volume1/downloads";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+    "/mnt/Synology/media" = {
+      device = "192.168.0.107:/volume1/media";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+    "/mnt/Synology/CAD" = {
+      device = "192.168.0.107:/volume1/CAD";
+      fsType = "nfs";
+      options = ["defaults" "nofail" "nfsvers=4" "x-systemd.automount"];
+    };
+  };
+
+  system.stateVersion = "23.11";
 }
